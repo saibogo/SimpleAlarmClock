@@ -26,14 +26,22 @@ public class ClockUniversalModel {
             result.add((long) this.clock.getMinutes());
             result.add((long) this.clock.getSecond());
         } else if(index < this.howManyElements()) {
-            Long deltaTime = controller.getControllers().get(index - 1).getAlarmClock().getAlarmDate().getTime() -
-                    (new Date()).getTime();
-            deltaTime = deltaTime >= 0 ? deltaTime : 0;
-            deltaTime = deltaTime / 1000;
-            result.add(deltaTime / 3600);
-            deltaTime = deltaTime % 3600;
-            result.add(deltaTime / 60);
-            result.add(deltaTime % 60);
+            try {
+                Long deltaTime = controller.getControllers().get(index - 1).getAlarmClock().getAlarmDate().getTime() -
+                        (new Date()).getTime();
+                deltaTime = deltaTime >= 0 ? deltaTime : 0;
+                deltaTime = deltaTime / 1000;
+                result.add(deltaTime / 3600);
+                deltaTime = deltaTime % 3600;
+                result.add(deltaTime / 60);
+                result.add(deltaTime % 60);
+            } catch (NullPointerException e) {
+                result.clear();
+                result.add(0L);
+                result.add(0L);
+                result.add(0L);
+                return result;
+            }
         } else {
             throw new IndexOutOfBoundsException();
         }
