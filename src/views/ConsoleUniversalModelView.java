@@ -1,6 +1,6 @@
 package views;
 
-import models.ClockUniversalModel;
+import models.clockModels.ClockUniversalModel;
 
 import java.util.List;
 

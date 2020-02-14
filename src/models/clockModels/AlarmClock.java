@@ -1,4 +1,4 @@
-package models;
+package models.clockModels;
 
 import javax.sound.midi.MidiChannel;
 import javax.sound.midi.MidiSystem;

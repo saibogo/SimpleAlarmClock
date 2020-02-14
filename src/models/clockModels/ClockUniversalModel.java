@@ -1,4 +1,4 @@
-package models;
+package models.clockModels;
 
 import controllers.AlarmClocksPullController;
 
@@ -38,5 +38,9 @@ public class ClockUniversalModel {
             throw new IndexOutOfBoundsException();
         }
         return result;
+    }
+
+    public Clock getClock() {
+        return this.clock;
     }
 }

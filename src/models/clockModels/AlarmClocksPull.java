@@ -1,4 +1,6 @@
-package models;
+package models.clockModels;
+
+import models.AlarmExistsException;
 
 import java.util.ArrayList;
 import java.util.Date;
