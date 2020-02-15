@@ -7,6 +7,7 @@ public class AlarmClockController extends Thread {
     private static int PAUSE_TIME_SOUND = 2000;
 
     private AlarmClock alarmClock;
+    private boolean alarmClockRun = true;
 
     public AlarmClockController(final AlarmClock alarmClock) {
         this.alarmClock = alarmClock;
@@ -18,10 +19,8 @@ public class AlarmClockController extends Thread {
 
     @Override
     public void run() {
-        int countBeep = 10;
-        while (countBeep > 0) {
+        while (alarmClockRun) {
             if (this.alarmClock.alarmIsRun()) {
-                countBeep--;
                 this.alarmClock.sayBeep();
             } else {
                 try {
@@ -34,5 +33,11 @@ public class AlarmClockController extends Thread {
         this.alarmClock.destructor();
     }
 
+
+    public void stopAlarmClock() {
+        this.alarmClockRun = false;
+        this.alarmClock.destructor();
+        this.interrupt();
+    }
 
 }

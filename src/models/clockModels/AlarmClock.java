@@ -8,19 +8,23 @@ import java.util.Date;
 
 public class AlarmClock {
 
-    private static int NOTE = 43;
     private static int VOLUME = 80;
     private static int TIME_SOUND = 750;
-    private static int MUSICAL_INSTRUMENT = 47;
 
     private Date alarmDate;
     private Synthesizer synthesizer;
     private MidiChannel[] channels;
     private String name;
+    private int note;
+    private int instrument;
+    private boolean stoppedStatus = false;
 
-    public AlarmClock(final String name, final Date alarmDate) {
-        this.alarmDate = alarmDate;
-        this.name = name;
+    private AlarmClock(Builder builder) {
+        this.alarmDate = builder.alarmDate;
+        this.name = builder.name;
+        this.note = builder.note;
+        this.instrument = builder.instrument;
+
         try {
             this.synthesizer = MidiSystem.getSynthesizer();
             this.synthesizer.open();
@@ -39,29 +43,70 @@ public class AlarmClock {
     }
 
     public void destructor() {
-        this.alarmDate = null;
-        this.synthesizer.close();
-        this.channels = null;
-        this.synthesizer = null;
+        this.stoppedStatus = true;
+
     }
 
     public boolean alarmIsRun() {
-        return alarmDate.getTime() <= (new Date()).getTime();
+        try {
+            return alarmDate.getTime() <= (new Date()).getTime();
+        } catch (NullPointerException e) {
+            return true;
+        }
     }
 
     public long secondsLeft() {
         return (alarmDate.getTime() - (new Date().getTime())) / 1000;
     }
 
+    public void appendTime(final long deltaTime) {
+        this.alarmDate = new Date((new Date()).getTime() + deltaTime);
+    }
+
     public void sayBeep() {
         try {
+            if (!this.stoppedStatus) {
+                channels[0].programChange(this.instrument);
+                channels[0].noteOn(this.note, VOLUME);
+                Thread.sleep(TIME_SOUND); // in milliseconds
+                channels[0].noteOff(this.note);
+            }
+        }  catch (InterruptedException ignored) {
+        }
+    }
 
-            channels[0].programChange(MUSICAL_INSTRUMENT);
-            channels[0].noteOn(NOTE, VOLUME);
-            Thread.sleep(TIME_SOUND); // in milliseconds
-            channels[0].noteOff(NOTE);
-        }  catch (InterruptedException e) {
-            System.out.println("Not found midi system");
+    public static class Builder {
+
+        private Date alarmDate = new Date();
+        private String name = "";
+        private int note = 43;
+        private int instrument = 47;
+
+        public Builder() {
+        }
+
+        public AlarmClock build() {
+            return new AlarmClock(this);
+        }
+
+        public Builder setAlarmDate(final Date alarmDate) {
+            this.alarmDate = alarmDate;
+            return this;
+        }
+
+        public Builder setName(final String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setNote(int note) {
+            this.note = note;
+            return this;
+        }
+
+        public Builder setInstrument(int instrument) {
+            this.instrument = instrument;
+            return this;
         }
     }
 }

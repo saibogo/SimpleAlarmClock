@@ -1,6 +1,8 @@
 package models.guiModels;
 
+import models.TripletBuildException;
 import models.clockModels.ClockUniversalModel;
+import models.supportModels.Triplet;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +14,7 @@ public class GuiClock extends JFrame {
     private ClockUniversalModel model;
     private JPanel panel;
 
-    public GuiClock(ClockUniversalModel model) throws HeadlessException {
+    public GuiClock(ClockUniversalModel model) throws HeadlessException, TripletBuildException {
         super(model.getClock().getName());
         this.model = model;
         this.panel = new JPanel(new FlowLayout());
@@ -23,19 +25,25 @@ public class GuiClock extends JFrame {
 
     }
 
-    private JLabel createNewLabel(List<Long> timeList) {
+    private JLabel createNewLabel(Triplet<Long> timeTriplet) {
         JLabel label = new JLabel();
         StringJoiner text = new StringJoiner(":");
-        for (Long item: timeList) {
-            if (item > 9) text.add("" + item);
-            else text.add("0" + item);
-        }
+
+        if (timeTriplet.getFirst() > 9) text.add("" + timeTriplet.getFirst());
+        else text.add("0" + timeTriplet.getFirst());
+
+        if (timeTriplet.getSecond() > 9) text.add("" + timeTriplet.getSecond());
+        else text.add("0" + timeTriplet.getSecond());
+
+        if (timeTriplet.getLast() > 9) text.add("" + timeTriplet.getLast());
+        else text.add("0" + timeTriplet.getLast());
+
         label.setText(" " + text.toString() + " ");
         label.setFont(SupportClass.FONT1);
         return label;
     }
 
-    protected void updatePanel(){
+    protected void updatePanel() throws TripletBuildException {
         panel.removeAll();
         int clockCount = model.howManyElements();
         JLabel label;

@@ -1,6 +1,8 @@
 package views;
 
+import models.TripletBuildException;
 import models.clockModels.ClockUniversalModel;
+import models.supportModels.Triplet;
 
 import java.util.List;
 
@@ -17,13 +19,13 @@ public class ConsoleUniversalModelView {
         return "0" + num;
     }
 
-    public void show() {
-        List<Long> data;
+    public void show() throws TripletBuildException {
+        Triplet<Long> data;
         int count = this.model.howManyElements();
         for (int i = 0; i < count; i++) {
             data = this.model.getTimeElement(i);
-            System.out.println(toTwoNumber(data.get(0)) +
-                    ":" + toTwoNumber(data.get(1)) + ":" + toTwoNumber(data.get(2)));
+            System.out.println(toTwoNumber(data.getFirst()) +
+                    ":" + toTwoNumber(data.getSecond()) + ":" + toTwoNumber(data.getLast()));
         }
     }
 }

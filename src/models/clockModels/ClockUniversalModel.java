@@ -1,10 +1,11 @@
 package models.clockModels;
 
 import controllers.AlarmClocksPullController;
+import models.TripletBuildException;
+import models.supportModels.Triplet;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
 
 public class ClockUniversalModel {
     private Clock clock;
@@ -19,28 +20,40 @@ public class ClockUniversalModel {
         return 1 + controller.size();
     }
 
-    public List<Long> getTimeElement(int index) {
-        List<Long> result = new ArrayList<>();
+    public Triplet<Long> getTimeElement(int index) throws TripletBuildException {
+        Triplet<Long> result = null;
         if (index == 0) {
-            result.add((long) this.clock.getHours());
-            result.add((long) this.clock.getMinutes());
-            result.add((long) this.clock.getSecond());
+            result = new  Triplet.Builder<Long>()
+                    .setFirst((long) this.clock.getHours())
+                    .setSecond((long) this.clock.getMinutes())
+                    .setLast((long) this.clock.getSecond())
+                    .build();
+
         } else if(index < this.howManyElements()) {
             try {
                 Long deltaTime = controller.getControllers().get(index - 1).getAlarmClock().getAlarmDate().getTime() -
                         (new Date()).getTime();
-                deltaTime = deltaTime >= 0 ? deltaTime : 0;
-                deltaTime = deltaTime / 1000;
-                result.add(deltaTime / 3600);
-                deltaTime = deltaTime % 3600;
-                result.add(deltaTime / 60);
-                result.add(deltaTime % 60);
-            } catch (NullPointerException e) {
-                result.clear();
-                result.add(0L);
-                result.add(0L);
-                result.add(0L);
-                return result;
+                deltaTime = (deltaTime >= 0 ? deltaTime : 0) / 1000L;
+                Long first = deltaTime / 3600L;
+                deltaTime = deltaTime % 3600L;
+                Long second = deltaTime / 60L;
+                Long last = deltaTime % 60L;
+
+                result = new Triplet.Builder<Long>()
+                        .setFirst(first)
+                        .setSecond(second)
+                        .setLast(last)
+                        .build();
+
+
+            } catch (NullPointerException | TripletBuildException e) {
+
+                result =  new Triplet.Builder<Long>()
+                        .setFirst(0L)
+                        .setSecond(0L)
+                        .setLast(0L)
+                        .build();
+
             }
         } else {
             throw new IndexOutOfBoundsException();

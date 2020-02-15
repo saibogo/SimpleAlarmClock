@@ -1,5 +1,7 @@
 package models.guiModels;
 
+import models.TripletBuildException;
+
 public class GuiThread extends Thread {
 
     private GuiClock guiClock;
@@ -11,7 +13,11 @@ public class GuiThread extends Thread {
     @Override
     public void run() {
         while (true) {
-            this.guiClock.updatePanel();
+            try {
+                this.guiClock.updatePanel();
+            } catch (TripletBuildException e) {
+                e.printStackTrace();
+            }
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
