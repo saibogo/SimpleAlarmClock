@@ -1,7 +1,7 @@
 package models.clockModels;
 
 import controllers.AlarmClocksPullController;
-import models.TripletBuildException;
+import myException.TripletBuildException;
 import models.supportModels.Triplet;
 
 import java.util.Date;
@@ -9,19 +9,19 @@ import java.util.Date;
 
 public class ClockUniversalModel {
     private Clock clock;
-    private AlarmClocksPullController controller;
+    private AlarmClocksPullController alarmClocksPullController;
 
-    public ClockUniversalModel(Clock clock, AlarmClocksPullController controller) {
+    public ClockUniversalModel(Clock clock, AlarmClocksPullController alarmClocksPullController) {
         this.clock = clock;
-        this.controller = controller;
+        this.alarmClocksPullController = alarmClocksPullController;
     }
 
     public int howManyElements() {
-        return 1 + controller.size();
+        return 1 + alarmClocksPullController.size();
     }
 
     public Triplet<Long> getTimeElement(int index) throws TripletBuildException {
-        Triplet<Long> result = null;
+        Triplet<Long> result;
         if (index == 0) {
             result = new  Triplet.Builder<Long>()
                     .setFirst((long) this.clock.getHours())
@@ -31,8 +31,10 @@ public class ClockUniversalModel {
 
         } else if(index < this.howManyElements()) {
             try {
-                Long deltaTime = controller.getControllers().get(index - 1).getAlarmClock().getAlarmDate().getTime() -
+                long deltaTime = alarmClocksPullController.getControllers().get(index - 1)
+                        .getAlarmClock().getAlarmDate().getTime() -
                         (new Date()).getTime();
+
                 deltaTime = (deltaTime >= 0 ? deltaTime : 0) / 1000L;
                 Long first = deltaTime / 3600L;
                 deltaTime = deltaTime % 3600L;
@@ -63,5 +65,9 @@ public class ClockUniversalModel {
 
     public Clock getClock() {
         return this.clock;
+    }
+
+    public AlarmClocksPullController getAlarmClocksPullController() {
+        return this.alarmClocksPullController;
     }
 }

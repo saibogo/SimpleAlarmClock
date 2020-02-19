@@ -1,6 +1,6 @@
 package models.supportModels;
 
-import models.TripletBuildException;
+import myException.TripletBuildException;
 
 public class Triplet<T> {
 
@@ -33,7 +33,7 @@ public class Triplet<T> {
 
         public Triplet<T> build() throws TripletBuildException {
             if (first != null && second != null && last != null)
-                return new Triplet<T>(this);
+                return new Triplet<>(this);
             else {
                 throw new TripletBuildException();
             }

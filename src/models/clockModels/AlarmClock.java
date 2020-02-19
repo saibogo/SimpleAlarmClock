@@ -8,7 +8,6 @@ import java.util.Date;
 
 public class AlarmClock {
 
-    private static int VOLUME = 80;
     private static int TIME_SOUND = 750;
 
     private Date alarmDate;
@@ -18,12 +17,15 @@ public class AlarmClock {
     private int note;
     private int instrument;
     private boolean stoppedStatus = false;
+    private boolean notCreatedDialog = false;
+    private int volume;
 
     private AlarmClock(Builder builder) {
         this.alarmDate = builder.alarmDate;
         this.name = builder.name;
         this.note = builder.note;
         this.instrument = builder.instrument;
+        this.volume = builder.volume;
 
         try {
             this.synthesizer = MidiSystem.getSynthesizer();
@@ -67,12 +69,20 @@ public class AlarmClock {
         try {
             if (!this.stoppedStatus) {
                 channels[0].programChange(this.instrument);
-                channels[0].noteOn(this.note, VOLUME);
+                channels[0].noteOn(this.note, this.volume);
                 Thread.sleep(TIME_SOUND); // in milliseconds
                 channels[0].noteOff(this.note);
             }
         }  catch (InterruptedException ignored) {
         }
+    }
+
+    public boolean isNotCreatedDialog() {
+        return notCreatedDialog;
+    }
+
+    public void setNotCreatedDialog(boolean notCreatedDialog) {
+        this.notCreatedDialog = notCreatedDialog;
     }
 
     public static class Builder {
@@ -81,6 +91,7 @@ public class AlarmClock {
         private String name = "";
         private int note = 43;
         private int instrument = 47;
+        private int volume = 80;
 
         public Builder() {
         }
@@ -108,5 +119,11 @@ public class AlarmClock {
             this.instrument = instrument;
             return this;
         }
+
+        public Builder setVolume(int volume) {
+            this.volume = volume;
+            return this;
+        }
     }
+
 }

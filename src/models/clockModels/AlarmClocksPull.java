@@ -1,6 +1,6 @@
 package models.clockModels;
 
-import models.AlarmExistsException;
+import myException.AlarmExistsException;
 
 import java.util.ArrayList;
 import java.util.Date;

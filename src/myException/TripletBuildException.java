@@ -1,4 +1,4 @@
-package models;
+package myException;
 
 public class TripletBuildException extends Exception {
 

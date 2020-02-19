@@ -1,37 +1,29 @@
 package models.clockModels;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Clock {
 
     private String name;
-    private Date date;
 
     public Clock(final String name) {
         this.name = name;
-        this.date = new Date();
     }
 
     public String getName() {
         return this.name;
     }
 
-    private void dateUpdate(){
-        date = new Date();
-    }
 
     public int getSecond() {
-        this.dateUpdate();
-        return date.getSeconds();
+        return LocalDateTime.now().getSecond();
     }
 
     public int getMinutes() {
-        this.dateUpdate();
-        return date.getMinutes();
+        return LocalDateTime.now().getMinute();
     }
 
     public int getHours() {
-        this.dateUpdate();
-        return date.getHours();
+        return LocalDateTime.now().getHour();
     }
 }

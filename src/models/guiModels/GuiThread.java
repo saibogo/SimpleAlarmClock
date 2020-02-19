@@ -1,6 +1,10 @@
 package models.guiModels;
 
-import models.TripletBuildException;
+import controllers.AlarmClockController;
+import controllers.AlarmClockGuiKiller;
+import myException.TripletBuildException;
+
+import java.util.List;
 
 public class GuiThread extends Thread {
 
@@ -12,9 +16,18 @@ public class GuiThread extends Thread {
 
     @Override
     public void run() {
+        List<AlarmClockController> tmp;
         while (true) {
             try {
                 this.guiClock.updatePanel();
+                tmp = guiClock.getControllersList();
+                for (AlarmClockController item: tmp) {
+                    if (item.getAlarmClock().alarmIsRun() && !item.getAlarmClock().isNotCreatedDialog()) {
+                        item.getAlarmClock().setNotCreatedDialog(true);
+                        (new AlarmClockGuiKiller(item)).start();
+                    }
+                }
+
             } catch (TripletBuildException e) {
                 e.printStackTrace();
             }

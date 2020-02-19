@@ -2,7 +2,7 @@ package controllers;
 
 import models.clockModels.AlarmClock;
 import models.clockModels.AlarmClocksPull;
-import models.AlarmExistsException;
+import myException.AlarmExistsException;
 
 import java.util.ArrayList;
 import java.util.List;
