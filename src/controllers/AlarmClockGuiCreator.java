@@ -9,9 +9,6 @@ import java.util.Date;
 
 public class AlarmClockGuiCreator {
 
-    private static int WIDTH = 300;
-    private static int HEIGHT = 200;
-
     public static void create(ClockUniversalModel clockUniversalModel) {
         JFrame frame = new JFrame("Новый будильник");
         frame.setLayout(new GridLayout(0, 2));
@@ -74,6 +71,8 @@ public class AlarmClockGuiCreator {
         cancelButton.addActionListener(actionEvent -> frame.dispose());
         frame.add(cancelButton);
 
+        int WIDTH = 300;
+        int HEIGHT = 200;
         frame.setSize(WIDTH, HEIGHT);                // задаем размеры окна
         frame.setResizable(false);              // запрещаем менять размер окна
         frame.setLocationRelativeTo(null);

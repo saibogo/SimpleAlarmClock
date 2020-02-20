@@ -4,9 +4,9 @@ import myException.TripletBuildException;
 
 public class Triplet<T> {
 
-    private T first;
-    private T second;
-    private T last;
+    private final T first;
+    private final T second;
+    private final T last;
 
     private Triplet(Builder<T> builder) {
         this.first = builder.first;

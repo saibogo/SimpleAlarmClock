@@ -1,10 +1,10 @@
 package models.clockModels;
 
-import java.time.LocalDateTime;
+import java.util.Calendar;
 
 public class Clock {
 
-    private String name;
+    private final String name;
 
     public Clock(final String name) {
         this.name = name;
@@ -16,14 +16,14 @@ public class Clock {
 
 
     public int getSecond() {
-        return LocalDateTime.now().getSecond();
+        return Calendar.getInstance().get(Calendar.SECOND);
     }
 
     public int getMinutes() {
-        return LocalDateTime.now().getMinute();
+        return Calendar.getInstance().get(Calendar.MINUTE);
     }
 
     public int getHours() {
-        return LocalDateTime.now().getHour();
+        return Calendar.getInstance().get(Calendar.HOUR);
     }
 }

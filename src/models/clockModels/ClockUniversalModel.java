@@ -1,15 +1,16 @@
 package models.clockModels;
 
 import controllers.AlarmClocksPullController;
-import myException.TripletBuildException;
 import models.supportModels.Triplet;
+import myException.TripletBuildException;
 
-import java.util.Date;
+import java.util.Calendar;
+
 
 
 public class ClockUniversalModel {
-    private Clock clock;
-    private AlarmClocksPullController alarmClocksPullController;
+    private final Clock clock;
+    private final AlarmClocksPullController alarmClocksPullController;
 
     public ClockUniversalModel(Clock clock, AlarmClocksPullController alarmClocksPullController) {
         this.clock = clock;
@@ -32,8 +33,7 @@ public class ClockUniversalModel {
         } else if(index < this.howManyElements()) {
             try {
                 long deltaTime = alarmClocksPullController.getControllers().get(index - 1)
-                        .getAlarmClock().getAlarmDate().getTime() -
-                        (new Date()).getTime();
+                        .getAlarmClock().getAlarmDate().getTime() - Calendar.getInstance().getTimeInMillis();
 
                 deltaTime = (deltaTime >= 0 ? deltaTime : 0) / 1000L;
                 Long first = deltaTime / 3600L;

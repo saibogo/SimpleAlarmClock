@@ -3,7 +3,7 @@ package views;
 import models.clockModels.AlarmClock;
 
 public class ConsoleViewAlarm {
-    private AlarmClock alarmClock;
+    private final AlarmClock alarmClock;
 
     public ConsoleViewAlarm(final AlarmClock alarmClock) {
         this.alarmClock = alarmClock;

@@ -9,10 +9,8 @@ import java.util.List;
 
 public class AlarmClocksPullController extends Thread{
 
-    private static int TIME_INTERVAL = 1000;
-
-    private AlarmClocksPull alarmClocksPull;
-    private List<AlarmClockController> alarmClockControllerList;
+    private final AlarmClocksPull alarmClocksPull;
+    private final List<AlarmClockController> alarmClockControllerList;
     private boolean exit = false;
 
     public AlarmClocksPullController(AlarmClocksPull alarmClocksPull) {
@@ -20,7 +18,7 @@ public class AlarmClocksPullController extends Thread{
         this.alarmClockControllerList = new ArrayList<>();
     }
 
-    public boolean addAlarmClock(final AlarmClock alarmClock) {
+    public void addAlarmClock(final AlarmClock alarmClock) {
 
         try {
             this.alarmClocksPull.addAlarmClock(alarmClock);
@@ -31,10 +29,8 @@ public class AlarmClocksPullController extends Thread{
 
         } catch (AlarmExistsException e) {
             System.out.println("Not add " + alarmClock + " in pull");
-            return false;
         }
 
-        return true;
     }
 
     public boolean pullIsEmpty() {
@@ -68,10 +64,11 @@ public class AlarmClocksPullController extends Thread{
         try {
             while (!exit) {
                 removeNotRunning();
+                int TIME_INTERVAL = 1000;
                 Thread.sleep(TIME_INTERVAL);
             }
         } catch (InterruptedException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 

@@ -1,13 +1,13 @@
 package views;
 
-import myException.TripletBuildException;
 import models.clockModels.ClockUniversalModel;
 import models.supportModels.Triplet;
+import myException.TripletBuildException;
 
 
 public class ConsoleUniversalModelView {
 
-    private ClockUniversalModel model;
+    private final ClockUniversalModel model;
 
     public ConsoleUniversalModelView(ClockUniversalModel model) {
         this.model = model;

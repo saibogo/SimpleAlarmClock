@@ -4,7 +4,7 @@ import models.clockModels.Clock;
 
 public class ConsoleClockView {
 
-    private Clock clock;
+    private final Clock clock;
 
     public ConsoleClockView(final Clock clock) {
         this.clock = clock;

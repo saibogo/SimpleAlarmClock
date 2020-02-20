@@ -2,19 +2,19 @@ package models.guiModels;
 
 import controllers.AlarmClockController;
 import controllers.AlarmClockGuiCreator;
-import myException.TripletBuildException;
 import models.clockModels.ClockUniversalModel;
 import models.supportModels.Triplet;
+import myException.TripletBuildException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.StringJoiner;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class GuiClock extends JFrame {
 
-    private ClockUniversalModel model;
-    private JPanel panel;
+    private final ClockUniversalModel model;
+    private final JPanel panel;
 
     public GuiClock(ClockUniversalModel model) throws HeadlessException, TripletBuildException {
         super(model.getClock().getName());
@@ -29,16 +29,12 @@ public class GuiClock extends JFrame {
 
     private JButton createButtonAddAlarmClock() {
         JButton button = new JButton("+");
-        button.setFont(SupportClass.FONT1);
-        button.setSize(SupportClass.FONT1.getSize(), SupportClass.FONT1.getSize());
         button.addActionListener(actionEvent -> AlarmClockGuiCreator.create(model));
         return button;
     }
 
     private JButton createButtonRemoveAlarmClock() {
         JButton button = new JButton("-");
-        button.setFont(SupportClass.FONT1);
-        button.setSize(SupportClass.FONT1.getSize(), SupportClass.FONT1.getSize());
         button.addActionListener(actionEvent -> System.out.println("Нажали -"));
         return button;
     }

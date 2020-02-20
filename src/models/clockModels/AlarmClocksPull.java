@@ -8,13 +8,13 @@ import java.util.List;
 
 public class AlarmClocksPull {
 
-    private List<AlarmClock> alarmClockList;
+    private final List<AlarmClock> alarmClockList;
 
     public AlarmClocksPull() {
         this.alarmClockList = new ArrayList<>();
     }
 
-    public boolean addAlarmClock(final AlarmClock alarmClock) throws AlarmExistsException {
+    public void addAlarmClock(final AlarmClock alarmClock) throws AlarmExistsException {
 
         Date newAlarmDate = alarmClock.getAlarmDate();
         for (AlarmClock clock: alarmClockList) {
@@ -23,15 +23,10 @@ public class AlarmClocksPull {
             }
         }
         this.alarmClockList.add(alarmClock);
-        return true;
     }
 
-    public boolean removeAlarmClock(final AlarmClock alarmClock) {
-        if (this.alarmClockList.contains(alarmClock)) {
-            this.alarmClockList.remove(alarmClock);
-            return true;
-        }
-        return false;
+    public void removeAlarmClock(final AlarmClock alarmClock) {
+        this.alarmClockList.remove(alarmClock);
     }
 
     public List<AlarmClock> getAlarmClockList() {

@@ -4,9 +4,7 @@ import models.clockModels.AlarmClock;
 
 public class AlarmClockController extends Thread {
 
-    private static int PAUSE_TIME_SOUND = 2000;
-
-    private AlarmClock alarmClock;
+    private final AlarmClock alarmClock;
     private boolean alarmClockRun = true;
 
     public AlarmClockController(final AlarmClock alarmClock) {
@@ -20,10 +18,10 @@ public class AlarmClockController extends Thread {
     @Override
     public void run() {
         while (alarmClockRun) {
-            if (this.alarmClock.alarmIsRun()) {
-                this.alarmClock.sayBeep();
-            } else {
+            if (this.alarmClock.alarmIsRun()) this.alarmClock.sayBeep();
+            else {
                 try {
+                    int PAUSE_TIME_SOUND = 2000;
                     Thread.sleep(PAUSE_TIME_SOUND);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

@@ -5,9 +5,7 @@ import java.awt.*;
 
 public class AlarmClockGuiKiller extends Thread {
 
-    private static long DELTA_TIME = 5 * 60 * 1000; //in milliseconds
-
-    private AlarmClockController controller;
+    private final AlarmClockController controller;
 
     public AlarmClockGuiKiller(AlarmClockController controller) {
         this.controller = controller;
@@ -19,6 +17,8 @@ public class AlarmClockGuiKiller extends Thread {
                 this.controller.getAlarmClock().getName() + "?", "Оповещение", JOptionPane.YES_NO_OPTION);
 
         if (n == JOptionPane.YES_OPTION) {
+            //in milliseconds
+            long DELTA_TIME = 5 * 60 * 1000;
             this.controller.getAlarmClock().appendTime(DELTA_TIME);
             this.controller.getAlarmClock().setNotCreatedDialog(false);
         } else {

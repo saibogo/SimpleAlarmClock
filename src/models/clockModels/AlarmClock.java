@@ -8,17 +8,15 @@ import java.util.Date;
 
 public class AlarmClock {
 
-    private static int TIME_SOUND = 750;
-
     private Date alarmDate;
     private Synthesizer synthesizer;
     private MidiChannel[] channels;
-    private String name;
-    private int note;
-    private int instrument;
+    private final String name;
+    private final int note;
+    private final int instrument;
     private boolean stoppedStatus = false;
     private boolean notCreatedDialog = false;
-    private int volume;
+    private final int volume;
 
     private AlarmClock(Builder builder) {
         this.alarmDate = builder.alarmDate;
@@ -46,7 +44,8 @@ public class AlarmClock {
 
     public void destructor() {
         this.stoppedStatus = true;
-
+        this.synthesizer.close();
+        
     }
 
     public boolean alarmIsRun() {
@@ -70,6 +69,7 @@ public class AlarmClock {
             if (!this.stoppedStatus) {
                 channels[0].programChange(this.instrument);
                 channels[0].noteOn(this.note, this.volume);
+                int TIME_SOUND = 750;
                 Thread.sleep(TIME_SOUND); // in milliseconds
                 channels[0].noteOff(this.note);
             }

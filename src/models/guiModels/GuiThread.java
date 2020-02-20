@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GuiThread extends Thread {
 
-    private GuiClock guiClock;
+    private final GuiClock guiClock;
 
     public GuiThread(GuiClock guiClock) {
         this.guiClock = guiClock;
@@ -30,6 +30,7 @@ public class GuiThread extends Thread {
 
             } catch (TripletBuildException e) {
                 e.printStackTrace();
+                break;
             }
             try {
                 Thread.sleep(1000);
