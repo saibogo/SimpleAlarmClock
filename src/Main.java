@@ -1,4 +1,5 @@
 import controllers.AlarmClocksPullController;
+import models.MemoryUsed;
 import models.clockModels.AlarmClocksPull;
 import models.clockModels.Clock;
 import models.clockModels.ClockUniversalModel;
@@ -22,6 +23,17 @@ public class Main {
         GuiClock gui = new GuiClock(model);
         GuiThread thread = new GuiThread(gui);
         thread.start();
+
+        MemoryUsed used = new MemoryUsed();
+
+        for (int i = 0; i < 1000; i++) {
+            used.show();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 }

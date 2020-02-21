@@ -1,9 +1,13 @@
 package models.clockModels;
 
+import models.supportModels.Triplet;
+import myException.TripletBuildException;
+
 import javax.sound.midi.MidiChannel;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AlarmClock {
@@ -17,6 +21,15 @@ public class AlarmClock {
     private boolean stoppedStatus = false;
     private boolean notCreatedDialog = false;
     private final int volume;
+    private Triplet<Long> timeTriplet;
+
+    {
+        try {
+            timeTriplet = new Triplet.Builder<Long>().setFirst(0L).setSecond(0L).setLast(0L).build();
+        } catch (TripletBuildException e) {
+            e.printStackTrace();
+        }
+    }
 
     private AlarmClock(Builder builder) {
         this.alarmDate = builder.alarmDate;
@@ -32,6 +45,7 @@ public class AlarmClock {
         } catch (MidiUnavailableException e) {
             System.out.println("Not found midi system");
         }
+
     }
 
     public String getName() {
@@ -50,18 +64,28 @@ public class AlarmClock {
 
     public boolean alarmIsRun() {
         try {
-            return alarmDate.getTime() <= (new Date()).getTime();
+            return alarmDate.getTime() <= Calendar.getInstance().getTimeInMillis();
         } catch (NullPointerException e) {
             return true;
         }
     }
 
     public long secondsLeft() {
-        return (alarmDate.getTime() - (new Date().getTime())) / 1000;
+        return (alarmDate.getTime() - Calendar.getInstance().getTimeInMillis()) / 1000;
     }
 
     public void appendTime(final long deltaTime) {
-        this.alarmDate = new Date((new Date()).getTime() + deltaTime);
+        this.alarmDate = new Date(Calendar.getInstance().getTimeInMillis() + deltaTime);
+    }
+
+    public Triplet<Long> getTimeTriplet() {
+        long deltaTime = this.alarmDate.getTime() - Calendar.getInstance().getTimeInMillis();
+        deltaTime = (deltaTime >= 0 ? deltaTime : 0) / 1000L;
+        
+        this.timeTriplet.setFirst(deltaTime / 3600L);
+        this.timeTriplet.setSecond((deltaTime % 3600L) / 60L);
+        this.timeTriplet.setLast((deltaTime % 3600L) % 60L);
+        return this.timeTriplet;
     }
 
     public void sayBeep() {

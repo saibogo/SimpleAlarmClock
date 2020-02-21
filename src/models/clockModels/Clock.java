@@ -1,10 +1,22 @@
 package models.clockModels;
 
+import models.supportModels.Triplet;
+import myException.TripletBuildException;
+
 import java.util.Calendar;
 
 public class Clock {
 
     private final String name;
+    private Triplet<Long> timeTriplet;
+
+    {
+        try {
+            timeTriplet = new Triplet.Builder<Long>().setFirst(0L).setSecond(0L).setLast(0L).build();
+        } catch (TripletBuildException e) {
+            e.printStackTrace();
+        }
+    }
 
     public Clock(final String name) {
         this.name = name;
@@ -24,6 +36,14 @@ public class Clock {
     }
 
     public int getHours() {
-        return Calendar.getInstance().get(Calendar.HOUR);
+        return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
     }
+
+    public Triplet<Long> getTimeTriplet() {
+        this.timeTriplet.setFirst((long) this.getHours());
+        this.timeTriplet.setSecond((long) this.getMinutes());
+        this.timeTriplet.setLast((long) this.getSecond());
+        return this.timeTriplet;
+    }
+
 }

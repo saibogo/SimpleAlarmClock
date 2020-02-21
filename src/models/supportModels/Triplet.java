@@ -4,9 +4,9 @@ import myException.TripletBuildException;
 
 public class Triplet<T> {
 
-    private final T first;
-    private final T second;
-    private final T last;
+    private  T first;
+    private  T second;
+    private  T last;
 
     private Triplet(Builder<T> builder) {
         this.first = builder.first;
@@ -24,6 +24,18 @@ public class Triplet<T> {
 
     public T getLast() {
         return last;
+    }
+
+    public void setFirst(T first) {
+        this.first = first;
+    }
+
+    public void setSecond(T second) {
+        this.second = second;
+    }
+
+    public void setLast(T last) {
+        this.last = last;
     }
 
     public static class Builder<T>{
