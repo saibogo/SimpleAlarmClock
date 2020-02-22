@@ -1,6 +1,6 @@
-package models.supportModels;
+package main.models.supportModels;
 
-import myException.TripletBuildException;
+import main.myException.TripletBuildException;
 
 public class Triplet<T> {
 

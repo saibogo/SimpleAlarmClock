@@ -1,8 +1,8 @@
-package views;
+package main.views;
 
-import models.clockModels.ClockUniversalModel;
-import models.supportModels.Triplet;
-import myException.TripletBuildException;
+import main.clockModels.ClockUniversalModel;
+import main.models.supportModels.Triplet;
+import main.myException.TripletBuildException;
 
 
 public class ConsoleUniversalModelView {

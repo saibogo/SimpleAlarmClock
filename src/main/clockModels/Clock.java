@@ -1,7 +1,7 @@
-package models.clockModels;
+package main.clockModels;
 
-import models.supportModels.Triplet;
-import myException.TripletBuildException;
+import main.models.supportModels.Triplet;
+import main.myException.TripletBuildException;
 
 import java.util.Calendar;
 

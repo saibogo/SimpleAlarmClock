@@ -1,8 +1,8 @@
-package models.clockModels;
+package main.clockModels;
 
-import controllers.AlarmClocksPullController;
-import models.supportModels.Triplet;
-import myException.TripletBuildException;
+import main.controllers.AlarmClocksPullController;
+import main.models.supportModels.Triplet;
+import main.myException.TripletBuildException;
 
 
 
@@ -30,7 +30,7 @@ public class ClockUniversalModel {
                         get(index - 1).getAlarmClock().getTimeTriplet();
 
 
-            } catch (NullPointerException e) {
+            } catch (NullPointerException | IndexOutOfBoundsException e) {
 
                 result =  new Triplet.Builder<Long>()
                         .setFirst(0L)
@@ -51,5 +51,9 @@ public class ClockUniversalModel {
 
     public AlarmClocksPullController getAlarmClocksPullController() {
         return this.alarmClocksPullController;
+    }
+
+    public void removeAlarmClockController(int i) {
+        this.alarmClocksPullController.getAlarmClocks().removeAlarmClock(i);
     }
 }

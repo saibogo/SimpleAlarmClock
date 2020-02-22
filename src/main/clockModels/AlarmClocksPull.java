@@ -1,6 +1,6 @@
-package models.clockModels;
+package main.clockModels;
 
-import myException.AlarmExistsException;
+import main.myException.AlarmExistsException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +27,10 @@ public class AlarmClocksPull {
 
     public void removeAlarmClock(final AlarmClock alarmClock) {
         this.alarmClockList.remove(alarmClock);
+    }
+
+    public void removeAlarmClock(final int i) {
+        if (i >= 0 && i < this.alarmClockList.size()) this.alarmClockList.remove(i);
     }
 
     public List<AlarmClock> getAlarmClockList() {

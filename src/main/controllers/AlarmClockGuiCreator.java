@@ -1,7 +1,7 @@
-package controllers;
+package main.controllers;
 
-import models.clockModels.AlarmClock;
-import models.clockModels.ClockUniversalModel;
+import main.clockModels.ClockUniversalModel;
+import main.clockModels.AlarmClock;
 
 import javax.swing.*;
 import java.awt.*;

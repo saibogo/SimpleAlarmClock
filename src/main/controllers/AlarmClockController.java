@@ -1,6 +1,6 @@
-package controllers;
+package main.controllers;
 
-import models.clockModels.AlarmClock;
+import main.clockModels.AlarmClock;
 
 public class AlarmClockController extends Thread {
 

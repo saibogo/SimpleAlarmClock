@@ -1,10 +1,11 @@
-package models.guiModels;
+package main.models.guiModels;
 
-import controllers.AlarmClockController;
-import controllers.AlarmClockGuiCreator;
-import models.clockModels.ClockUniversalModel;
-import models.supportModels.Triplet;
-import myException.TripletBuildException;
+import main.controllers.AlarmClockController;
+import main.controllers.AlarmClockGuiCreator;
+import main.clockModels.ClockUniversalModel;
+import main.controllers.AlarmClockGuiRemove;
+import main.models.supportModels.Triplet;
+import main.myException.TripletBuildException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +15,6 @@ import java.util.StringJoiner;
 
 public class GuiClock extends JFrame {
 
-    private static final String tabString = " ".repeat(6);
     private static final String timeSeparator = ":";
     private static final String zeroString = "0";
 
@@ -23,24 +23,31 @@ public class GuiClock extends JFrame {
     private List<JLabel> labelList;
     private JButton deleteButton;
 
+    private Font font = (new SupportClass()).getFont();
+
     public GuiClock(ClockUniversalModel model) throws HeadlessException, TripletBuildException {
         super(model.getClock().getName());
         this.model = model;
         this.panel = new JPanel(new GridLayout(0, 1));
         this.labelList = new ArrayList<>();
 
-        JPanel buttonPanel = new JPanel(new FlowLayout());
+        JPanel buttonPanel = new JPanel(new GridLayout(0, 2));
         buttonPanel.setVisible(true);
+
         JButton createButton = createButtonAddAlarmClock();
+        createButton.setFont(this.font);
         this.deleteButton = createButtonRemoveAlarmClock();
+        this.deleteButton.setFont(this.font);
         createButton.setVisible(true);
         buttonPanel.add(createButton);
         buttonPanel.add(deleteButton);
+
         this.panel.add(buttonPanel);
 
         this.updatePanel();
+        this.labelList.get(0).setForeground(Color.BLUE);
 
-        this.add(this.panel);
+        this.add(this.panel, BorderLayout.CENTER);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
 
@@ -54,7 +61,7 @@ public class GuiClock extends JFrame {
 
     private JButton createButtonRemoveAlarmClock() {
         JButton button = new JButton("-");
-        button.addActionListener(actionEvent -> System.out.println("Нажали -"));
+        button.addActionListener(actionEvent -> AlarmClockGuiRemove.remove(model));
         return button;
     }
 
@@ -71,8 +78,8 @@ public class GuiClock extends JFrame {
         if (timeTriplet.getLast() > 9) text.add(timeTriplet.getLast().toString());
         else text.add(zeroString + timeTriplet.getLast());
 
-        label.setText(tabString + text.toString() + tabString);
-        label.setFont(SupportClass.FONT1);
+        label.setText(text.toString());
+        label.setFont(this.font);
     }
 
     protected void updatePanel() throws TripletBuildException {
@@ -85,6 +92,7 @@ public class GuiClock extends JFrame {
 
             if (clockCount > this.labelList.size()) {
             this.labelList.add(new JLabel());
+            this.labelList.get(this.labelList.size() - 1).setForeground(Color.PINK);
 
             } else {
                 while (clockCount < this.labelList.size()) this.labelList.remove(clockCount);
@@ -92,7 +100,7 @@ public class GuiClock extends JFrame {
 
             for (int i = 0; i < clockCount; i++){
                 updateLabel(this.model.getTimeElement(i), this.labelList.get(i));
-                panel.add(this.labelList.get(i), BorderLayout.NORTH);
+                panel.add(this.labelList.get(i));
             }
         } else {
             for (int i = 0; i < clockCount; i++) updateLabel(this.model.getTimeElement(i), this.labelList.get(i));
@@ -100,9 +108,8 @@ public class GuiClock extends JFrame {
 
         this.deleteButton.setVisible(clockCount > 1);
 
-        this.setSize(SupportClass.calculateWidth(SupportClass.FONT1),
-                SupportClass.calculateHeight(this.model, SupportClass.FONT1));
         panel.updateUI();
+        this.pack();
 
     }
 

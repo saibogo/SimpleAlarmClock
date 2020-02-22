@@ -1,8 +1,8 @@
-package models.guiModels;
+package main.models.guiModels;
 
-import controllers.AlarmClockController;
-import controllers.AlarmClockGuiKiller;
-import myException.TripletBuildException;
+import main.controllers.AlarmClockController;
+import main.controllers.AlarmClockGuiKiller;
+import main.myException.TripletBuildException;
 
 import java.util.List;
 

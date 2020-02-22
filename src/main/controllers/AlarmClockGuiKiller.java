@@ -1,11 +1,13 @@
-package controllers;
+package main.controllers;
+
+import main.controllers.AlarmClockController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class AlarmClockGuiKiller extends Thread {
 
-    private  AlarmClockController controller;
+    private AlarmClockController controller;
 
     public AlarmClockGuiKiller(AlarmClockController controller) {
         this.controller = controller;

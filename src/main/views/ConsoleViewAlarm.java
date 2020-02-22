@@ -1,6 +1,6 @@
-package views;
+package main.views;
 
-import models.clockModels.AlarmClock;
+import main.clockModels.AlarmClock;
 
 public class ConsoleViewAlarm {
     private final AlarmClock alarmClock;

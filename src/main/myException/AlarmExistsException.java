@@ -1,4 +1,4 @@
-package myException;
+package main.myException;
 
 public class AlarmExistsException extends Exception {
 

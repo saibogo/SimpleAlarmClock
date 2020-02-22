@@ -1,8 +1,9 @@
-package controllers;
+package main.controllers;
 
-import models.clockModels.AlarmClock;
-import models.clockModels.AlarmClocksPull;
-import myException.AlarmExistsException;
+import main.clockModels.AlarmClock;
+import main.clockModels.AlarmClocksPull;
+import main.controllers.AlarmClockController;
+import main.myException.AlarmExistsException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,8 @@ public class AlarmClocksPullController extends Thread{
     public List<AlarmClockController> getControllers() {
         return this.alarmClockControllerList;
     }
+
+    public AlarmClocksPull getAlarmClocks() { return this.alarmClocksPull; }
 
 
 
