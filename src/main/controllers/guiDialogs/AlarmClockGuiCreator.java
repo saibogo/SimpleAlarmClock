@@ -1,7 +1,7 @@
-package main.controllers;
+package main.controllers.guiDialogs;
 
-import main.clockModels.ClockUniversalModel;
-import main.clockModels.AlarmClock;
+import main.models.clockModels.ClockUniversalModel;
+import main.models.clockModels.AlarmClock;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +10,11 @@ import java.util.Date;
 public class AlarmClockGuiCreator {
 
     public static void create(ClockUniversalModel clockUniversalModel) {
+
         JFrame frame = new JFrame("Новый будильник");
         frame.setLayout(new GridLayout(0, 2));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 
         frame.add(new JLabel("Имя будильника:"));
         JTextField fieldName = new JTextField(15);
@@ -71,10 +73,14 @@ public class AlarmClockGuiCreator {
         cancelButton.addActionListener(actionEvent -> frame.dispose());
         frame.add(cancelButton);
 
+        /*
         int WIDTH = 300;
         int HEIGHT = 200;
         frame.setSize(WIDTH, HEIGHT);                // задаем размеры окна
-        frame.setResizable(false);              // запрещаем менять размер окна
+        frame.setResizable(false);
+                      // запрещаем менять размер окна
+         */
+        frame.pack();
         frame.setLocationRelativeTo(null);
 
         frame.setVisible(true);

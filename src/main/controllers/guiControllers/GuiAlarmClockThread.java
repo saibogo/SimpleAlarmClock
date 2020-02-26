@@ -1,16 +1,16 @@
-package main.models.guiModels;
+package main.controllers.guiControllers;
 
 import main.controllers.AlarmClockController;
-import main.controllers.AlarmClockGuiKiller;
+import main.controllers.guiDialogs.AlarmClockGuiKiller;
 import main.myException.TripletBuildException;
 
 import java.util.List;
 
-public class GuiThread extends Thread {
+public class GuiAlarmClockThread extends Thread {
 
     private final GuiClock guiClock;
 
-    public GuiThread(GuiClock guiClock) {
+    public GuiAlarmClockThread(GuiClock guiClock) {
         this.guiClock = guiClock;
     }
 

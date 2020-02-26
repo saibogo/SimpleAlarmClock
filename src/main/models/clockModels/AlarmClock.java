@@ -1,4 +1,4 @@
-package main.clockModels;
+package main.models.clockModels;
 
 import main.models.supportModels.Triplet;
 import main.myException.TripletBuildException;
@@ -12,16 +12,16 @@ import java.util.Date;
 
 public class AlarmClock {
 
-    private Date alarmDate;
-    private Synthesizer synthesizer;
-    private MidiChannel[] channels;
-    private final String name;
-    private final int note;
-    private final int instrument;
-    private boolean stoppedStatus = false;
-    private boolean notCreatedDialog = false;
-    private final int volume;
-    private Triplet<Long> timeTriplet;
+    protected Date alarmDate;
+    protected Synthesizer synthesizer;
+    protected MidiChannel[] channels;
+    protected final String name;
+    protected final int note;
+    protected final int instrument;
+    protected boolean stoppedStatus = false;
+    protected boolean notCreatedDialog = false;
+    protected final int volume;
+    protected Triplet<Long> timeTriplet;
 
     {
         try {
@@ -31,7 +31,7 @@ public class AlarmClock {
         }
     }
 
-    private AlarmClock(Builder builder) {
+    protected AlarmClock(Builder builder) {
         this.alarmDate = builder.alarmDate;
         this.name = builder.name;
         this.note = builder.note;

@@ -1,9 +1,9 @@
-package main.models.guiModels;
+package main.controllers.guiControllers;
 
 import main.controllers.AlarmClockController;
-import main.controllers.AlarmClockGuiCreator;
-import main.clockModels.ClockUniversalModel;
-import main.controllers.AlarmClockGuiRemove;
+import main.controllers.guiDialogs.AlarmClockGuiCreator;
+import main.models.clockModels.ClockUniversalModel;
+import main.controllers.guiDialogs.SelectToRemoveAlarmClockGui;
 import main.models.supportModels.Triplet;
 import main.myException.TripletBuildException;
 
@@ -23,7 +23,6 @@ public class GuiClock extends JFrame {
     private List<JLabel> labelList;
     private JButton deleteButton;
 
-    private Font font = (new SupportClass()).getFont();
 
     public GuiClock(ClockUniversalModel model) throws HeadlessException, TripletBuildException {
         super(model.getClock().getName());
@@ -35,9 +34,8 @@ public class GuiClock extends JFrame {
         buttonPanel.setVisible(true);
 
         JButton createButton = createButtonAddAlarmClock();
-        createButton.setFont(this.font);
         this.deleteButton = createButtonRemoveAlarmClock();
-        this.deleteButton.setFont(this.font);
+
         createButton.setVisible(true);
         buttonPanel.add(createButton);
         buttonPanel.add(deleteButton);
@@ -49,6 +47,7 @@ public class GuiClock extends JFrame {
 
         this.add(this.panel, BorderLayout.CENTER);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
 
     }
@@ -56,12 +55,14 @@ public class GuiClock extends JFrame {
     private JButton createButtonAddAlarmClock() {
         JButton button = new JButton("+");
         button.addActionListener(actionEvent -> AlarmClockGuiCreator.create(model));
+        button.setToolTipText("Добавить будильник");
         return button;
     }
 
     private JButton createButtonRemoveAlarmClock() {
         JButton button = new JButton("-");
-        button.addActionListener(actionEvent -> AlarmClockGuiRemove.remove(model));
+        button.addActionListener(actionEvent -> SelectToRemoveAlarmClockGui.selectAlarmClockDialog(model));
+        button.setToolTipText("Удалить будильник");
         return button;
     }
 
@@ -79,7 +80,6 @@ public class GuiClock extends JFrame {
         else text.add(zeroString + timeTriplet.getLast());
 
         label.setText(text.toString());
-        label.setFont(this.font);
     }
 
     protected void updatePanel() throws TripletBuildException {

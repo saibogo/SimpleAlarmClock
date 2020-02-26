@@ -1,6 +1,6 @@
 package main.views;
 
-import main.clockModels.Clock;
+import main.models.clockModels.Clock;
 
 public class ConsoleClockView {
 

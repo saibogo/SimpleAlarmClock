@@ -1,6 +1,6 @@
 package main.views;
 
-import main.clockModels.ClockUniversalModel;
+import main.models.clockModels.ClockUniversalModel;
 import main.models.supportModels.Triplet;
 import main.myException.TripletBuildException;
 

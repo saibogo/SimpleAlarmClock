@@ -1,4 +1,4 @@
-package main.clockModels;
+package main.models.clockModels;
 
 import main.models.supportModels.Triplet;
 import main.myException.TripletBuildException;

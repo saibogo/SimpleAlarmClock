@@ -1,10 +1,11 @@
-package main.controllers;
+package main.controllers.guiDialogs;
 
-import main.clockModels.AlarmClocksPull;
-import main.clockModels.Clock;
-import main.clockModels.ClockUniversalModel;
-import main.models.guiModels.GuiClock;
-import main.models.guiModels.GuiThread;
+import main.controllers.AlarmClocksPullController;
+import main.models.clockModels.AlarmClocksPull;
+import main.models.clockModels.Clock;
+import main.models.clockModels.ClockUniversalModel;
+import main.controllers.guiControllers.GuiClock;
+import main.controllers.guiControllers.GuiAlarmClockThread;
 import main.myException.TripletBuildException;
 
 public class GuiCreatorController {
@@ -26,7 +27,7 @@ public class GuiCreatorController {
         } catch (TripletBuildException e) {
             e.printStackTrace();
         }
-        GuiThread thread = new GuiThread(gui);
+        GuiAlarmClockThread thread = new GuiAlarmClockThread(gui);
         thread.start();
 
     }
