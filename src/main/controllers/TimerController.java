@@ -35,8 +35,9 @@ public class TimerController extends Thread {
 
     public void stopTimer() {
         this.timerRun = false;
-        this.timer.destructor();
+        if (this.timer != null) this.timer.destructor();
         this.interrupt();
+        this.timer = null;
 
     }
 

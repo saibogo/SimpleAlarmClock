@@ -11,12 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 
 public class GuiClock extends JFrame {
-
-    private static final String timeSeparator = ":";
-    private static final String zeroString = "0";
 
     private final ClockUniversalModel model;
     private final JPanel panel;
@@ -68,18 +64,9 @@ public class GuiClock extends JFrame {
 
 
     private void updateLabel(Triplet<Long> timeTriplet, JLabel label) {
-        StringJoiner text = new StringJoiner(timeSeparator);
 
-        if (timeTriplet.getFirst() > 9) text.add(timeTriplet.getFirst().toString());
-        else text.add(zeroString + timeTriplet.getFirst());
-
-        if (timeTriplet.getSecond() > 9) text.add(timeTriplet.getSecond().toString());
-        else text.add(zeroString + timeTriplet.getSecond());
-
-        if (timeTriplet.getLast() > 9) text.add(timeTriplet.getLast().toString());
-        else text.add(zeroString + timeTriplet.getLast());
-
-        label.setText(text.toString());
+        label.setText(SupportClass.timeToString3(timeTriplet.getFirst(),
+                timeTriplet.getSecond(), timeTriplet.getLast()));
     }
 
     protected void updatePanel() throws TripletBuildException {

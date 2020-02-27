@@ -33,9 +33,6 @@ public class AlarmClocksPullController extends Thread{
 
     }
 
-    public boolean pullIsEmpty() {
-        return this.alarmClockControllerList.isEmpty();
-    }
 
     public void removeNotRunning() {
 

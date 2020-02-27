@@ -7,8 +7,6 @@ import main.models.clockModels.Timer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -85,35 +83,27 @@ public class GuiCreatorTimer extends JFrame {
 
         JButton createButton = new JButton("Запустить таймер");
         createButton.setVisible(true);
-        createButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                long deltaTime = (int)hoursModel.getNumber() * 3600 +
-                        (int)minutesModel.getNumber() * 60 +
-                        (int)secondsModel.getNumber();
-                Timer timer = (Timer) new Timer.Builder()
-                        .setName(fieldName.getText())
-                        .setAlarmDate(new Date(Calendar.getInstance().getTimeInMillis() + deltaTime * 1000))
-                        .setVolume(volume.getValue())
-                        .setNote(note.getValue())
-                        .setInstrument(instrument.getValue())
-                        .build();
-                TimerController controller = new TimerController(timer);
-                GuiTimer guiTimer = new GuiTimer(controller);
-                controller.start();
-                GuiTimerThread guiTimerThread = new GuiTimerThread(guiTimer);
-                guiTimerThread.start();
-                dispose();
-            }
+        createButton.addActionListener(actionEvent -> {
+            long deltaTime = (int)hoursModel.getNumber() * 3600 +
+                    (int)minutesModel.getNumber() * 60 +
+                    (int)secondsModel.getNumber();
+            Timer timer = (Timer) new Timer.Builder()
+                    .setName(fieldName.getText())
+                    .setAlarmDate(new Date(Calendar.getInstance().getTimeInMillis() + deltaTime * 1000))
+                    .setVolume(volume.getValue())
+                    .setNote(note.getValue())
+                    .setInstrument(instrument.getValue())
+                    .build();
+            TimerController controller = new TimerController(timer);
+            GuiTimer guiTimer = new GuiTimer(controller);
+            controller.start();
+            GuiTimerThread guiTimerThread = new GuiTimerThread(guiTimer);
+            guiTimerThread.start();
+            dispose();
         });
         JButton cancelButton = new JButton("Отмена");
         cancelButton.setVisible(true);
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                System.exit(0);
-            }
-        });
+        cancelButton.addActionListener(actionEvent -> System.exit(0));
 
         this.add(createButton);
         this.add(cancelButton);

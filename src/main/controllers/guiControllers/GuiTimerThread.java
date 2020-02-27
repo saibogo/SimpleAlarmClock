@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class GuiTimerThread extends Thread {
 
-    private final GuiTimer guiTimer;
+    private GuiTimer guiTimer;
     private boolean dialogCreated = false;
 
     public GuiTimerThread(GuiTimer guiTimer) {
@@ -56,6 +56,7 @@ public class GuiTimerThread extends Thread {
                     GuiTimerThread.this.guiTimer.getTimerController().stopTimer();
                     GuiTimerThread.this.interrupt();
                     GuiTimerThread.this.guiTimer.dispose();
+                    GuiTimerThread.this.guiTimer = null;
                     System.exit(0);
                 }
             });

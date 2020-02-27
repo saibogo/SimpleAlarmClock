@@ -5,8 +5,6 @@ import main.controllers.AlarmClockController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,25 +26,17 @@ public class SelectToRemoveAlarmClockGui {
         JPanel buttonPanel = new JPanel();
 
         JButton removeButton = new JButton("Удалить");
-        removeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                int num = selectCombo.getSelectedIndex();
-                model.getAlarmClocksPullController().getControllers().get(num).stopAlarmClock();
-                model.removeAlarmClockController(num);
-                model.getAlarmClocksPullController().getControllers().remove(num);
-                frame.dispose();
-            }
+        removeButton.addActionListener(actionEvent -> {
+            int num = selectCombo.getSelectedIndex();
+            model.getAlarmClocksPullController().getControllers().get(num).stopAlarmClock();
+            model.removeAlarmClockController(num);
+            model.getAlarmClocksPullController().getControllers().remove(num);
+            frame.dispose();
         });
         removeButton.setVisible(true);
 
         JButton cancelButton = new JButton("Отмена");
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                frame.dispose();
-            }
-        });
+        cancelButton.addActionListener(actionEvent -> frame.dispose());
         cancelButton.setVisible(true);
 
         buttonPanel.add(removeButton);

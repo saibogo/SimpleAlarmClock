@@ -33,9 +33,6 @@ public class AlarmClocksPull {
         if (i >= 0 && i < this.alarmClockList.size()) this.alarmClockList.remove(i);
     }
 
-    public List<AlarmClock> getAlarmClockList() {
-        return new ArrayList<>(this.alarmClockList);
-    }
 
     public int size() {
         return this.alarmClockList.size();
