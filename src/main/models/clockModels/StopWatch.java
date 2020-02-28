@@ -1,11 +1,8 @@
 package main.models.clockModels;
 
-import java.util.Calendar;
-import java.util.Date;
-
 public class StopWatch {
 
-    private Date startDate;
+    private long startDate;
     private long timePassed;
     private static long msInTenth = 100;
     private static long msInSeconds = 10 * msInTenth;
@@ -14,11 +11,11 @@ public class StopWatch {
 
 
     public StopWatch() {
-        this.startDate = Calendar.getInstance().getTime();
+        this.startDate = System.currentTimeMillis();
     }
 
     public long getTimePassed() {
-        return Calendar.getInstance().getTimeInMillis() - startDate.getTime();
+        return System.currentTimeMillis() - startDate;
     }
 
     public void updateTimePassed() {

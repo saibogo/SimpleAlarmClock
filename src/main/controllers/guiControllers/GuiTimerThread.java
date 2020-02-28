@@ -2,8 +2,6 @@ package main.controllers.guiControllers;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GuiTimerThread extends Thread {
 
@@ -34,7 +32,11 @@ public class GuiTimerThread extends Thread {
                break;
             }
         }
-        this.guiTimer.getTimerController().stopTimer();
+        try {
+            this.guiTimer.getTimerController().stopTimer();
+        } catch (NullPointerException ignored) {
+
+        }
     }
 
     private class GuiTimerKiller extends JFrame {
@@ -50,15 +52,12 @@ public class GuiTimerThread extends Thread {
             this.add(label);
 
             JButton cancelButton = new JButton("Прервать таймер");
-            cancelButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    GuiTimerThread.this.guiTimer.getTimerController().stopTimer();
-                    GuiTimerThread.this.interrupt();
-                    GuiTimerThread.this.guiTimer.dispose();
-                    GuiTimerThread.this.guiTimer = null;
-                    System.exit(0);
-                }
+            cancelButton.addActionListener(actionEvent -> {
+                GuiTimerThread.this.guiTimer.getTimerController().stopTimer();
+                GuiTimerThread.this.interrupt();
+                GuiTimerThread.this.guiTimer.dispose();
+                GuiTimerThread.this.guiTimer = null;
+                System.exit(0);
             });
             cancelButton.setVisible(true);
             this.add(cancelButton);

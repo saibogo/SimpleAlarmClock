@@ -7,10 +7,14 @@ import main.models.clockModels.Timer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Calendar;
 import java.util.Date;
 
 public class GuiCreatorTimer extends JFrame {
+
+    private static long msInSecond = 1000L;
+    private static long secInMinutes = 60L;
+    private static long secInHour = 60 * secInMinutes;
+
 
     public GuiCreatorTimer() throws HeadlessException {
 
@@ -84,12 +88,12 @@ public class GuiCreatorTimer extends JFrame {
         JButton createButton = new JButton("Запустить таймер");
         createButton.setVisible(true);
         createButton.addActionListener(actionEvent -> {
-            long deltaTime = (int)hoursModel.getNumber() * 3600 +
-                    (int)minutesModel.getNumber() * 60 +
+            long deltaTime = (int)hoursModel.getNumber() * secInHour +
+                    (int)minutesModel.getNumber() * secInMinutes +
                     (int)secondsModel.getNumber();
             Timer timer = (Timer) new Timer.Builder()
                     .setName(fieldName.getText())
-                    .setAlarmDate(new Date(Calendar.getInstance().getTimeInMillis() + deltaTime * 1000))
+                    .setAlarmDate(new Date(System.currentTimeMillis() + deltaTime * msInSecond))
                     .setVolume(volume.getValue())
                     .setNote(note.getValue())
                     .setInstrument(instrument.getValue())

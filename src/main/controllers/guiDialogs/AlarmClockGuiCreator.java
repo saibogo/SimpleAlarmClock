@@ -9,6 +9,8 @@ import java.util.Date;
 
 public class AlarmClockGuiCreator {
 
+    private static long addMsToAlarm = 300000L;
+
     public static void create(ClockUniversalModel clockUniversalModel) {
 
         JFrame frame = new JFrame("Новый будильник");
@@ -23,7 +25,7 @@ public class AlarmClockGuiCreator {
 
         frame.add(new JLabel("Время включения:"));
         SpinnerDateModel model = new SpinnerDateModel();
-        model.setValue(new Date(new Date().getTime() + 100000));
+        model.setValue(new Date(System.currentTimeMillis() + addMsToAlarm));
         JSpinner spinner = new JSpinner(model);
         frame.add(spinner);
 
@@ -50,7 +52,7 @@ public class AlarmClockGuiCreator {
 
         JButton createButton = new JButton("Создать");
         createButton.addActionListener(actionEvent -> {
-            if (model.getDate().getTime() > (new Date()).getTime()) {
+            if (model.getDate().getTime() > System.currentTimeMillis()) {
 
                 AlarmClock ac = new AlarmClock.Builder()
                         .setName(fieldName.getText())

@@ -7,7 +7,6 @@ import javax.sound.midi.MidiChannel;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
-import java.util.Calendar;
 import java.util.Date;
 
 public class AlarmClock {
@@ -64,22 +63,22 @@ public class AlarmClock {
 
     public boolean alarmIsRun() {
         try {
-            return alarmDate.getTime() <= Calendar.getInstance().getTimeInMillis();
+            return alarmDate.getTime() <= System.currentTimeMillis();
         } catch (NullPointerException e) {
             return true;
         }
     }
 
     public long secondsLeft() {
-        return (alarmDate.getTime() - Calendar.getInstance().getTimeInMillis()) / 1000;
+        return (alarmDate.getTime() - System.currentTimeMillis()) / 1000;
     }
 
     public void appendTime(final long deltaTime) {
-        this.alarmDate = new Date(Calendar.getInstance().getTimeInMillis() + deltaTime);
+        this.alarmDate.setTime(System.currentTimeMillis() + deltaTime);
     }
 
     public Triplet<Long> getTimeTriplet() {
-        long deltaTime = this.alarmDate.getTime() - Calendar.getInstance().getTimeInMillis();
+        long deltaTime = this.alarmDate.getTime() - System.currentTimeMillis();
         deltaTime = (deltaTime >= 0 ? deltaTime : 0) / 1000L;
         
         this.timeTriplet.setFirst(deltaTime / 3600L);

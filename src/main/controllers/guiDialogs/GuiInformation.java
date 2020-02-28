@@ -1,17 +1,18 @@
 package main.controllers.guiDialogs;
 
+import main.controllers.guiControllers.SupportClass;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class GuiInformation{
 
-    private static String author = "Андрей Глейх";
-    private static String license = "GNU General Public License v3.0";
-    private static String version = "0.2";
-    private static String http = "https://github.com/saibogo/SimpleAlarmClock";
+
 
     public static void showProductionInfo() {
-        String msg = "Автор: " + author + "\nЛицензия: " + license + "\nВерсия: " + version + "\nСайт: " + http;
+        String msg = "Автор: " + SupportClass.author + "\nЛицензия: " +
+                SupportClass.license + "\nВерсия: " +
+                SupportClass.version + "\nСайт: " + SupportClass.http;
         JOptionPane.showMessageDialog(new Frame(), msg, "О программе", JOptionPane.INFORMATION_MESSAGE);
     }
 }
