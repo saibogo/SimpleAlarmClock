@@ -1,6 +1,7 @@
 package main.controllers.consoleControllers;
 
 import main.models.clockModels.AlarmClock;
+import main.support.Localisation;
 
 import java.util.Scanner;
 
@@ -25,12 +26,12 @@ public class ConsoleAlarmClockController extends Thread {
             }
         }
         beeper.start();
-        System.out.println("Отложить будильник " + alarmClock.getName() + " на 5 минут?(1 - да)");
+        System.out.println(Localisation.addTimeToAlarmClock(alarmClock.getName()));
         int answer = new Scanner(System.in).nextInt();
         beeper.interrupt();
         if (answer == 1) {
             this.alarmClock.appendTime(5 * 60 * 1000);
-            System.out.println("Будильник " + alarmClock.getName() + " перенесен на " + alarmClock.getAlarmDate());
+            System.out.println(Localisation.newTimeToAlarmClock(alarmClock.getName(), alarmClock.getAlarmDate()));
             this.run();
         }
     }

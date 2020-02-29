@@ -1,6 +1,7 @@
 package main.controllers.guiControllers;
 
 import main.controllers.TimerController;
+import main.support.SupportClass;
 
 import javax.swing.*;
 import java.awt.*;

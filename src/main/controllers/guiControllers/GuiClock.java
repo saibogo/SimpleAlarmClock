@@ -6,6 +6,7 @@ import main.models.clockModels.ClockUniversalModel;
 import main.controllers.guiDialogs.SelectToRemoveAlarmClockGui;
 import main.models.supportModels.Triplet;
 import main.myException.TripletBuildException;
+import main.support.SupportClass;
 
 import javax.swing.*;
 import java.awt.*;

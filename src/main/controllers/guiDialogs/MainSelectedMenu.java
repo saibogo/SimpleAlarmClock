@@ -1,9 +1,9 @@
 package main.controllers.guiDialogs;
 
 import main.controllers.StopWatchController;
-import main.controllers.guiControllers.GuiStopWatch;
 import main.controllers.guiControllers.GuiStopWatchThread;
 import main.models.clockModels.StopWatch;
+import main.support.Localisation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,23 +12,23 @@ public class MainSelectedMenu extends JFrame {
 
     public MainSelectedMenu() {
         this.setLayout(new GridLayout(0, 1));
-        this.setTitle("Что использовать?");
+        this.setTitle(Localisation.selectDevice());
 
-        JButton alarmClockButton = new JButton("Часы с будильником");
+        JButton alarmClockButton = new JButton(Localisation.alarmClock());
         alarmClockButton.addActionListener(actionEvent -> {
             MainSelectedMenu.this.dispose();
-            new GuiCreatorController("Будильник");
+            new GuiCreatorController(Localisation.alarmClock());
         });
         alarmClockButton.setVisible(true);
 
-        JButton timerButton = new JButton("Простой таймер");
+        JButton timerButton = new JButton(Localisation.timer());
         timerButton.setVisible(true);
         timerButton.addActionListener(actionEvent -> {
             MainSelectedMenu.this.dispose();
             new GuiCreatorTimer();
         });
 
-        JButton stopWatchButton = new JButton("Секундомер");
+        JButton stopWatchButton = new JButton(Localisation.stopWatch());
         stopWatchButton.setVisible(true);
         stopWatchButton.addActionListener(actionEvent -> {
             StopWatch stopWatch = new StopWatch();
@@ -37,14 +37,32 @@ public class MainSelectedMenu extends JFrame {
             dispose();
         });
 
-        JButton infoButton = new JButton("О программе");
+        JButton infoButton = new JButton(Localisation.information());
         infoButton.setVisible(true);
         infoButton.addActionListener(actionEvent -> GuiInformation.showProductionInfo());
+
+        JButton changeLanguageButton = new JButton(Localisation.changeLanguage());
+        changeLanguageButton.setVisible(true);
+        changeLanguageButton.addActionListener(actionEvent -> {
+            if (Localisation.getCurrentLanguage() == Localisation.Languages.RU) {
+                Localisation.setCurrentLang(Localisation.Languages.ENG);
+            } else {
+                Localisation.setCurrentLang(Localisation.Languages.RU);
+            }
+            this.setTitle(Localisation.selectDevice());
+            alarmClockButton.setText(Localisation.alarmClock());
+            timerButton.setText(Localisation.timer());
+            stopWatchButton.setText(Localisation.stopWatch());
+            infoButton.setText(Localisation.information());
+            changeLanguageButton.setText(Localisation.changeLanguage());
+            this.pack();
+        });
 
         this.add(alarmClockButton);
         this.add(timerButton);
         this.add(stopWatchButton);
         this.add(infoButton);
+        this.add(changeLanguageButton);
         this.pack();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);

@@ -1,18 +1,15 @@
 package main.controllers.guiDialogs;
 
-import main.controllers.guiControllers.SupportClass;
+import main.support.Localisation;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class GuiInformation{
 
-
-
     public static void showProductionInfo() {
-        String msg = "Автор: " + SupportClass.author + "\nЛицензия: " +
-                SupportClass.license + "\nВерсия: " +
-                SupportClass.version + "\nСайт: " + SupportClass.http;
-        JOptionPane.showMessageDialog(new Frame(), msg, "О программе", JOptionPane.INFORMATION_MESSAGE);
+        String msg = Localisation.author() + ": " + Localisation.authorName() + "\n" + Localisation.license() + ": " +
+                Localisation.licenseType() + "\n" + Localisation.version() + ": " +
+                Localisation.versionNumber() + "\n" + Localisation.http() + ": " + Localisation.httpAddress();
+        JOptionPane.showMessageDialog(new JFrame(), msg, Localisation.information(), JOptionPane.INFORMATION_MESSAGE);
     }
 }

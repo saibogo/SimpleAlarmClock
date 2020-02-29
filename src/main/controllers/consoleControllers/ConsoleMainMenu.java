@@ -3,9 +3,11 @@ package main.controllers.consoleControllers;
 import main.models.clockModels.AlarmClock;
 import main.models.clockModels.StopWatch;
 import main.models.clockModels.Timer;
+import main.support.Localisation;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleMainMenu {
@@ -15,21 +17,36 @@ public class ConsoleMainMenu {
         Scanner scanner = new Scanner(System.in);
         int typeDevices = 0;
         while (notCorrectedDialog) {
-            System.out.println("Выберите тип устройства:");
-            System.out.println("1 - Будильник\n2 - Таймер\n3 - Секундомер\n0 - Выход");
-            typeDevices = scanner.nextInt();
-            if (typeDevices >= 0 && typeDevices < 4) notCorrectedDialog = false;
-            else System.out.println("Некорректный ввод. Попробуйте еще раз!");
+            System.out.println(Localisation.selectDevice());
+            System.out.println("1 - " + Localisation.alarmClock() + "\n2 - " + Localisation.timer() +
+                    "\n3 - " + Localisation.stopWatch() + "\n4 - " + Localisation.changeLanguage() + "\n0 - " +
+                    Localisation.exitString());
+            try {
+                typeDevices = scanner.nextInt();
+                if (typeDevices >= 0 && typeDevices < 5) notCorrectedDialog = false;
+            } catch (InputMismatchException e) {
+                typeDevices = 0;
+                scanner = new Scanner(System.in);
+            }
+
+            if (notCorrectedDialog)System.out.println(Localisation.notCorrectedData());
         }
         switch (typeDevices) {
-            case 1 : System.out.println("Выбран будильник");
+            case 1 : System.out.println(Localisation.alarmClock());
                     createAlarmClock();
                     break;
-            case 2 : System.out.println("Выбран таймер");
+            case 2 : System.out.println(Localisation.timer());
                     createTimer();
                     break;
-            case 3 : System.out.println("Секундомер");
+            case 3 : System.out.println(Localisation.stopWatch());
                     createStopWatch();
+                    break;
+            case 4 : if (Localisation.getCurrentLanguage() == Localisation.Languages.RU) {
+                Localisation.setCurrentLang(Localisation.Languages.ENG);
+            } else {
+                Localisation.setCurrentLang(Localisation.Languages.RU);
+            }
+            selectClockType();
                     break;
             default: System.exit(0);
         }
@@ -47,19 +64,20 @@ public class ConsoleMainMenu {
         int volume = 0;
         while (notCorrectedDialog) {
             try {
-                System.out.println("Название будильника :");
+                System.out.println(Localisation.devicesName() + ":");
                 name = scanner.next();
-                System.out.println("Час срабатывания:");
+                System.out.println(Localisation.selectTimeToAlarmClock());
+                System.out.println(Localisation.hours() + ":");
                 hour = scanner.nextInt();
-                System.out.println("Минуты:");
+                System.out.println(Localisation.minutes() + ":");
                 minute = scanner.nextInt();
-                System.out.println("Секунды:");
+                System.out.println(Localisation.seconds() + ":");
                 seconds = scanner.nextInt();
-                System.out.println("Нота будильника(от 0 до 131 включительно)");
+                System.out.println(Localisation.noteInstrument());
                 note = scanner.nextInt();
-                System.out.println("Номер музыкального инструмента (от 1 до 128 включительно)");
+                System.out.println(Localisation.instrumentNumber());
                 instrument = scanner.nextInt();
-                System.out.println("Громкость звука в процентах % (от 0 до 100)");
+                System.out.println(Localisation.volume());
                 volume = scanner.nextInt();
 
                 if (volume < 0 || volume > 100) notCorrectedDialog = true;
@@ -72,8 +90,9 @@ public class ConsoleMainMenu {
 
             } catch (Exception e) {
                 notCorrectedDialog = true;
+                scanner = new Scanner(System.in);
             }
-            if(notCorrectedDialog)  System.out.println("Некорректные данные. Попробуйте снова!");
+            if(notCorrectedDialog)  System.out.println(Localisation.notCorrectedData());
         }
 
         Date tmpDate = Calendar.getInstance().getTime();
@@ -82,7 +101,7 @@ public class ConsoleMainMenu {
         tmpDate.setSeconds(seconds);
 
         if (tmpDate.getTime() < System.currentTimeMillis()) tmpDate.setTime(tmpDate.getTime() + 24 * 3600 * 1000);
-        System.out.println("Устанавливается будильник " + name  + " на " + tmpDate);
+        System.out.println(Localisation.setupDeviceToTime(name, tmpDate));
 
         AlarmClock alarmClock = new AlarmClock.Builder()
                 .setName(name)
@@ -106,19 +125,20 @@ public class ConsoleMainMenu {
         int volume = 0;
         while (notCorrectedDialog) {
             try {
-                System.out.println("Название таймера:");
+                System.out.println(Localisation.devicesName() + ":");
                 name = scanner.next();
-                System.out.println("Сколько часов:");
+                System.out.println(Localisation.howManyToTimer());
+                System.out.println(Localisation.hours() + ":");
                 hour = scanner.nextInt();
-                System.out.println("Сколько минут:");
+                System.out.println(Localisation.minutes() + ":");
                 minute = scanner.nextInt();
-                System.out.println("Сколько секунд:");
+                System.out.println(Localisation.seconds() +  ":");
                 seconds = scanner.nextInt();
-                System.out.println("Нота оповещения(от 0 до 131 включительно)");
+                System.out.println(Localisation.noteInstrument());
                 note = scanner.nextInt();
-                System.out.println("Номер музыкального инструмента (от 1 до 128 включительно)");
+                System.out.println(Localisation.instrumentNumber());
                 instrument = scanner.nextInt();
-                System.out.println("Громкость звука в процентах % (от 0 до 100)");
+                System.out.println(Localisation.volume());
                 volume = scanner.nextInt();
 
                 if (volume < 0 || volume > 100) notCorrectedDialog = true;
@@ -131,13 +151,14 @@ public class ConsoleMainMenu {
 
             } catch (Exception e) {
                 notCorrectedDialog = true;
+                scanner = new Scanner(System.in);
             }
-            if(notCorrectedDialog)  System.out.println("Некорректные данные. Попробуйте снова!");
+            if(notCorrectedDialog)  System.out.println(Localisation.notCorrectedData());
         }
 
         Date tmpDate = new Date(System.currentTimeMillis() + (hour * 3600 + minute * 60 + seconds) * 1000);
 
-        System.out.println("Устанавливается таймер " + name  + " на " + tmpDate);
+        System.out.println(Localisation.setupDeviceToTime(name, tmpDate));
 
         Timer timer = (Timer) new Timer.Builder()
                 .setName(name)
@@ -150,7 +171,7 @@ public class ConsoleMainMenu {
     }
 
     private static void createStopWatch() {
-        System.out.println("Запущен консольный секундомер");
+        System.out.println(Localisation.startingStopWatch());
         StopWatch stopWatch = new StopWatch();
         new ConsoleStopWatchController(stopWatch).start();
     }

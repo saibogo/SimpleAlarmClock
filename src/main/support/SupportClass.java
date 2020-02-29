@@ -1,4 +1,4 @@
-package main.controllers.guiControllers;
+package main.support;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -12,11 +12,6 @@ public class SupportClass {
 
     public static final String timeSeparator = ":";
     private static final String zeroString = "0";
-
-    public static String author = "Андрей Глейх";
-    public static String license = "GNU General Public License v3.0";
-    public static String version = "0.3";
-    public static String http = "https://github.com/saibogo/SimpleAlarmClock";
 
     private  Font font;
 

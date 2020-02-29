@@ -1,6 +1,6 @@
 package main.controllers;
 
-import main.controllers.guiControllers.SupportClass;
+import main.support.SupportClass;
 import main.controllers.guiDialogs.MainSelectedMenu;
 
 public class GuiStarter {
