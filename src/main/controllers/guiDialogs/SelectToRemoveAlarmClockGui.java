@@ -2,6 +2,7 @@ package main.controllers.guiDialogs;
 
 import main.models.clockModels.ClockUniversalModel;
 import main.controllers.AlarmClockController;
+import main.support.Localisation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,7 @@ public class SelectToRemoveAlarmClockGui {
 
     public static void selectAlarmClockDialog(ClockUniversalModel model) {
 
-        JFrame frame = new JFrame("Выберите будильник для удаления");
+        JFrame frame = new JFrame(Localisation.selectAlarmClockToRemove());
         List<String> alarmClockList = new ArrayList<>();
         for (AlarmClockController item: model.getAlarmClocksPullController().getControllers()) {
             alarmClockList.add(item.getAlarmClock().getName() + " -> " + item.getAlarmClock().getAlarmDate());
@@ -25,7 +26,7 @@ public class SelectToRemoveAlarmClockGui {
 
         JPanel buttonPanel = new JPanel();
 
-        JButton removeButton = new JButton("Удалить");
+        JButton removeButton = new JButton(Localisation.removeAlarmClock());
         removeButton.addActionListener(actionEvent -> {
             int num = selectCombo.getSelectedIndex();
             model.getAlarmClocksPullController().getControllers().get(num).stopAlarmClock();
@@ -35,7 +36,7 @@ public class SelectToRemoveAlarmClockGui {
         });
         removeButton.setVisible(true);
 
-        JButton cancelButton = new JButton("Отмена");
+        JButton cancelButton = new JButton(Localisation.cancel());
         cancelButton.addActionListener(actionEvent -> frame.dispose());
         cancelButton.setVisible(true);
 

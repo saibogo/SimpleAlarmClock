@@ -1,6 +1,7 @@
 package main.controllers.guiDialogs;
 
 import main.controllers.AlarmClockController;
+import main.support.Localisation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,9 +16,9 @@ public class AlarmClockGuiKiller extends Thread {
 
     @Override
     public void run() {
-        int n = JOptionPane.showConfirmDialog(new Frame(), "Отложить будильник " +
-                this.controller.getAlarmClock().getName() + " на 5 минут?",
-                "Оповещение", JOptionPane.YES_NO_OPTION);
+        int n = JOptionPane.showConfirmDialog(new Frame(),
+                Localisation.addTimeToAlarmClockGui(this.controller.getAlarmClock().getName()),
+                Localisation.alarmMessage(), JOptionPane.YES_NO_OPTION);
 
         if (n == JOptionPane.YES_OPTION) {
             long DELTA_TIME = 5 * 60 * 1000;

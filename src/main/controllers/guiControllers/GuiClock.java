@@ -6,6 +6,7 @@ import main.models.clockModels.ClockUniversalModel;
 import main.controllers.guiDialogs.SelectToRemoveAlarmClockGui;
 import main.models.supportModels.Triplet;
 import main.myException.TripletBuildException;
+import main.support.Localisation;
 import main.support.SupportClass;
 
 import javax.swing.*;
@@ -26,6 +27,7 @@ public class GuiClock extends JFrame {
         this.model = model;
         this.panel = new JPanel(new GridLayout(0, 1));
         this.labelList = new ArrayList<>();
+        this.setTitle(Localisation.alarmClock());
 
         JPanel buttonPanel = new JPanel(new GridLayout(0, 2));
         buttonPanel.setVisible(true);
@@ -52,14 +54,14 @@ public class GuiClock extends JFrame {
     private JButton createButtonAddAlarmClock() {
         JButton button = new JButton("+");
         button.addActionListener(actionEvent -> AlarmClockGuiCreator.create(model));
-        button.setToolTipText("Добавить будильник");
+        button.setToolTipText(Localisation.addAlarmClock());
         return button;
     }
 
     private JButton createButtonRemoveAlarmClock() {
         JButton button = new JButton("-");
         button.addActionListener(actionEvent -> SelectToRemoveAlarmClockGui.selectAlarmClockDialog(model));
-        button.setToolTipText("Удалить будильник");
+        button.setToolTipText(Localisation.removeAlarmClock());
         return button;
     }
 

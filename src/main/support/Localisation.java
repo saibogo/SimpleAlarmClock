@@ -176,10 +176,62 @@ public class Localisation {
         return "Add 5 minutes to Alarm Clock named " + name + "?(1 - yes)";
     }
 
+    public static String addTimeToAlarmClockGui(String name) {
+        if (currentLang == Languages.RU) return "Отложить будильник " + name + " на 5 минут?(1 - да)";
+        return "Add 5 minutes to Alarm Clock named " + name + "?";
+    }
+
     public static String newTimeToAlarmClock(String name, Date date) {
         if (currentLang == Languages.RU) return "Будильник " + name + " перенесен на " + date;
         return "New time to Alarm Clock " + name + " is " + date;
     }
+
+    public static String addAlarmClock() {
+        if (currentLang == Languages.RU) return "Добавить будильник";
+        return "Add Alarm Clock";
+    }
+
+    public static String removeAlarmClock() {
+        if (currentLang == Languages.RU) return "Удалить будильник";
+        return "Remove Alarm Clock";
+    }
+
+    public static String alarmMessage() {
+        if (currentLang == Languages.RU) return "Оповещение";
+        return "Alarm message";
+    }
+
+    public static String create() {
+        if (currentLang == Languages.RU) return "Создать";
+        return "Create";
+    }
+
+    public static String notCorrectedTime() {
+        if (currentLang == Languages.RU) return "Некорректно задано время!";
+        return "Time not corrected!";
+    }
+
+    public static String timeTooSmall() {
+        if (currentLang == Languages.RU) return "Дата и время должны быть больше текущего!";
+        return "Date and time must be greater than the current!";
+    }
+
+    public static String cancel() {
+        if (currentLang == Languages.RU) return "Отмена";
+        return "Cancel";
+    }
+
+    public static String setupTime() {
+        if (currentLang == Languages.RU) return "Задайте время";
+        return "Select time";
+    }
+
+    public static String selectAlarmClockToRemove() {
+        if (currentLang == Languages.RU) return "Выберите будильник для удаления";
+        return "Select Alarm Clock to Remove";
+    }
+
+
 
     public enum Languages {
         RU, ENG
