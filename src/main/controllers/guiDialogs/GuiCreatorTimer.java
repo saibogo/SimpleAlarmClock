@@ -4,9 +4,11 @@ import main.controllers.TimerController;
 import main.controllers.guiControllers.GuiTimer;
 import main.controllers.guiControllers.GuiTimerThread;
 import main.models.clockModels.Timer;
+import main.support.Localisation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class GuiCreatorTimer extends JFrame {
@@ -19,18 +21,18 @@ public class GuiCreatorTimer extends JFrame {
     public GuiCreatorTimer() throws HeadlessException {
 
         this.setLayout(new GridLayout(0, 2));
-        this.setTitle("Параметры таймера");
+        this.setTitle(Localisation.timerParameters());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        JLabel labelName =  new JLabel("Имя таймера");
+        JLabel labelName =  new JLabel(Localisation.devicesName());
         labelName.setVisible(true);
         JTextField fieldName = new JTextField(15);
-        fieldName.setText("Таймер");
+        fieldName.setText(Localisation.timer());
         fieldName.setVisible(true);
         this.add(labelName);
         this.add(fieldName);
 
-        JLabel hours = new JLabel("Часов");
+        JLabel hours = new JLabel(Localisation.hours());
         hours.setVisible(true);
         JSpinner hoursSpinner = new JSpinner();
         SpinnerNumberModel hoursModel = new SpinnerNumberModel();
@@ -41,7 +43,7 @@ public class GuiCreatorTimer extends JFrame {
         this.add(hours);
         this.add(hoursSpinner);
 
-        JLabel minutes = new JLabel("Минут");
+        JLabel minutes = new JLabel(Localisation.minutes());
         minutes.setVisible(true);
         JSpinner minutesSpinner = new JSpinner();
         SpinnerNumberModel minutesModel = new SpinnerNumberModel();
@@ -52,7 +54,7 @@ public class GuiCreatorTimer extends JFrame {
         this.add(minutes);
         this.add(minutesSpinner);
 
-        JLabel seconds = new JLabel("Секунд");
+        JLabel seconds = new JLabel(Localisation.seconds());
         seconds.setVisible(true);
         JSpinner secondsSpinner = new JSpinner();
         SpinnerNumberModel secondsModel = new SpinnerNumberModel();
@@ -63,21 +65,21 @@ public class GuiCreatorTimer extends JFrame {
         this.add(seconds);
         this.add(secondsSpinner);
 
-        this.add(new JLabel("Громкость:"));
+        this.add(new JLabel(Localisation.volume()));
         JSlider volume = new JSlider();
         volume.setMaximum(100);
         volume.setMinimum(0);
         volume.setValue(50);
         this.add(volume);
 
-        this.add(new JLabel("Нота сигнала:"));
+        this.add(new JLabel(Localisation.noteInstrument()));
         JSlider note = new JSlider();
         note.setMinimum(0);
         note.setMaximum(131);
         note.setValue(43);
         this.add(note);
 
-        this.add(new JLabel("Инструмент сигнала:"));
+        this.add(new JLabel(Localisation.instrumentNumber()));
         JSlider instrument = new JSlider();
         instrument.setMinimum(1);
         instrument.setMaximum(128);
@@ -85,7 +87,7 @@ public class GuiCreatorTimer extends JFrame {
         this.add(instrument);
 
 
-        JButton createButton = new JButton("Запустить таймер");
+        JButton createButton = new JButton(Localisation.startTimer());
         createButton.setVisible(true);
         createButton.addActionListener(actionEvent -> {
             long deltaTime = (int)hoursModel.getNumber() * secInHour +
@@ -105,7 +107,7 @@ public class GuiCreatorTimer extends JFrame {
             guiTimerThread.start();
             dispose();
         });
-        JButton cancelButton = new JButton("Отмена");
+        JButton cancelButton = new JButton(Localisation.cancel());
         cancelButton.setVisible(true);
         cancelButton.addActionListener(actionEvent -> System.exit(0));
 

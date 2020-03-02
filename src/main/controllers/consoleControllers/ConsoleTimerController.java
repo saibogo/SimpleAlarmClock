@@ -1,6 +1,7 @@
 package main.controllers.consoleControllers;
 
 import main.models.clockModels.Timer;
+import main.support.Localisation;
 
 
 public class ConsoleTimerController extends ConsoleAlarmClockController {
@@ -21,6 +22,7 @@ public class ConsoleTimerController extends ConsoleAlarmClockController {
             }
         }
         beeper.start();
-        System.out.println("Сработал таймер " + this.alarmClock.getName());
+        System.out.println(Localisation.timerSayBeep(this.alarmClock.getName()));
+        System.out.println(Localisation.pleaseInterrupt());
     }
 }

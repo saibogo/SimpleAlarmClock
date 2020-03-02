@@ -1,5 +1,7 @@
 package main.controllers.guiControllers;
 
+import main.support.Localisation;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -43,15 +45,15 @@ public class GuiTimerThread extends Thread {
 
         public GuiTimerKiller() throws HeadlessException {
             this.setLayout(new GridLayout(0, 1));
-            this.setTitle("Оповещение");
+            this.setTitle(Localisation.alarmMessage());
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-            JLabel label = new JLabel("Таймер " +
-                    GuiTimerThread.this.guiTimer.getTimerController().getTimer().getName() + " сработал!");
+            JLabel label = new JLabel(Localisation.timerSayBeep(GuiTimerThread.this.guiTimer
+                    .getTimerController().getTimer().getName()));
             label.setVisible(true);
             this.add(label);
 
-            JButton cancelButton = new JButton("Прервать таймер");
+            JButton cancelButton = new JButton(Localisation.stopTimerSignal());
             cancelButton.addActionListener(actionEvent -> {
                 GuiTimerThread.this.guiTimer.getTimerController().stopTimer();
                 GuiTimerThread.this.interrupt();

@@ -39,7 +39,7 @@ public class Localisation {
     }
 
     public static String versionNumber() {
-        return "0.3";
+        return "0.4";
     }
 
     public static String http() {
@@ -231,7 +231,30 @@ public class Localisation {
         return "Select Alarm Clock to Remove";
     }
 
+    public static String timerParameters() {
+        if (currentLang == Languages.RU) return "Параметры таймера";
+        return "Timer setup parameters";
+    }
 
+    public static String startTimer() {
+        if (currentLang == Languages.RU) return "Запустить таймер";
+        return "Start Timer";
+    }
+
+    public static String stopTimerSignal() {
+        if (currentLang == Languages.RU) return "Остановить таймер";
+        return "Stop Timer";
+    }
+
+    public static String timerSayBeep(String name) {
+        if (currentLang == Languages.RU) return "Таймер " + name + " сработал!";
+        return "Timer " + name + " is Running!";
+    }
+
+    public static String pleaseInterrupt() {
+        if (currentLang == Languages.RU) return "Нажмите Ctrl + C для остановки";
+        return "Precc Ctrl + C to stopping timer";
+    }
 
     public enum Languages {
         RU, ENG

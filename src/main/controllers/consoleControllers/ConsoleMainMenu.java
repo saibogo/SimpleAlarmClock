@@ -6,11 +6,15 @@ import main.models.clockModels.Timer;
 import main.support.Localisation;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleMainMenu {
+
+    private static long msInSec = 1000;
+    private static long secInMinute = 60;
+    private static long secInHour = 3600;
+    private static long hourInDay = 24;
 
     public static void selectClockType() {
         boolean notCorrectedDialog = true;
@@ -53,119 +57,46 @@ public class ConsoleMainMenu {
     }
 
     public static void createAlarmClock() {
-        boolean notCorrectedDialog = true;
-        Scanner scanner = new Scanner(System.in);
-        String name = "";
-        int hour = 0;
-        int minute = 0;
-        int seconds = 0;
-        int note = 0;
-        int instrument = 0;
-        int volume = 0;
-        while (notCorrectedDialog) {
-            try {
-                System.out.println(Localisation.devicesName() + ":");
-                name = scanner.next();
-                System.out.println(Localisation.selectTimeToAlarmClock());
-                System.out.println(Localisation.hours() + ":");
-                hour = scanner.nextInt();
-                System.out.println(Localisation.minutes() + ":");
-                minute = scanner.nextInt();
-                System.out.println(Localisation.seconds() + ":");
-                seconds = scanner.nextInt();
-                System.out.println(Localisation.noteInstrument());
-                note = scanner.nextInt();
-                System.out.println(Localisation.instrumentNumber());
-                instrument = scanner.nextInt();
-                System.out.println(Localisation.volume());
-                volume = scanner.nextInt();
+        Builder builder = new Builder(DeviceType.ALARMCLOCK);
+        builder.inputDataToCreateDevice();
 
-                if (volume < 0 || volume > 100) notCorrectedDialog = true;
-                else if (instrument < 1 || instrument > 128) notCorrectedDialog = true;
-                else if (note < 0 || note > 131) notCorrectedDialog = true;
-                else if (seconds < 0 || seconds > 59) notCorrectedDialog = true;
-                else if (minute < 0 || minute > 59) notCorrectedDialog = true;
-                else notCorrectedDialog = hour < 0 || hour > 23;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, builder.getHour());
+        calendar.set(Calendar.MINUTE, builder.getMinute());
+        calendar.set(Calendar.SECOND, builder.getSeconds());
 
-
-            } catch (Exception e) {
-                notCorrectedDialog = true;
-                scanner = new Scanner(System.in);
-            }
-            if(notCorrectedDialog)  System.out.println(Localisation.notCorrectedData());
+        if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
+            calendar.setTimeInMillis(calendar.getTimeInMillis() + hourInDay * secInHour * msInSec);
         }
-
-        Date tmpDate = Calendar.getInstance().getTime();
-        tmpDate.setHours(hour);
-        tmpDate.setMinutes(minute);
-        tmpDate.setSeconds(seconds);
-
-        if (tmpDate.getTime() < System.currentTimeMillis()) tmpDate.setTime(tmpDate.getTime() + 24 * 3600 * 1000);
-        System.out.println(Localisation.setupDeviceToTime(name, tmpDate));
+        System.out.println(Localisation.setupDeviceToTime(builder.getName(), calendar.getTime()));
 
         AlarmClock alarmClock = new AlarmClock.Builder()
-                .setName(name)
-                .setAlarmDate(tmpDate)
-                .setInstrument(instrument)
-                .setNote(note)
-                .setVolume(volume)
+                .setName(builder.getName())
+                .setAlarmDate(calendar.getTime())
+                .setInstrument(builder.getInstrument())
+                .setNote(builder.getNote())
+                .setVolume(builder.getVolume())
                 .build();
         new ConsoleAlarmClockController(alarmClock).start();
     }
 
     private static void createTimer() {
-        boolean notCorrectedDialog = true;
-        Scanner scanner = new Scanner(System.in);
-        String name = "";
-        int hour = 0;
-        int minute = 0;
-        int seconds = 0;
-        int note = 0;
-        int instrument = 0;
-        int volume = 0;
-        while (notCorrectedDialog) {
-            try {
-                System.out.println(Localisation.devicesName() + ":");
-                name = scanner.next();
-                System.out.println(Localisation.howManyToTimer());
-                System.out.println(Localisation.hours() + ":");
-                hour = scanner.nextInt();
-                System.out.println(Localisation.minutes() + ":");
-                minute = scanner.nextInt();
-                System.out.println(Localisation.seconds() +  ":");
-                seconds = scanner.nextInt();
-                System.out.println(Localisation.noteInstrument());
-                note = scanner.nextInt();
-                System.out.println(Localisation.instrumentNumber());
-                instrument = scanner.nextInt();
-                System.out.println(Localisation.volume());
-                volume = scanner.nextInt();
+        Builder builder = new Builder(DeviceType.TIMER);
+        builder.inputDataToCreateDevice();
 
-                if (volume < 0 || volume > 100) notCorrectedDialog = true;
-                else if (instrument < 1 || instrument > 128) notCorrectedDialog = true;
-                else if (note < 0 || note > 131) notCorrectedDialog = true;
-                else if (seconds < 0 || seconds > 59) notCorrectedDialog = true;
-                else if (minute < 0 || minute > 59) notCorrectedDialog = true;
-                else notCorrectedDialog = hour < 0;
+        Calendar calendar = Calendar.getInstance();
+        int msInDay = (int) ((builder.getHour() * secInHour + builder.getMinute() * secInMinute +
+                builder.getSeconds()) * msInSec);
+        calendar.setTimeInMillis(System.currentTimeMillis() + msInDay);
 
-
-            } catch (Exception e) {
-                notCorrectedDialog = true;
-                scanner = new Scanner(System.in);
-            }
-            if(notCorrectedDialog)  System.out.println(Localisation.notCorrectedData());
-        }
-
-        Date tmpDate = new Date(System.currentTimeMillis() + (hour * 3600 + minute * 60 + seconds) * 1000);
-
-        System.out.println(Localisation.setupDeviceToTime(name, tmpDate));
+        System.out.println(Localisation.setupDeviceToTime(builder.getName(), calendar.getTime()));
 
         Timer timer = (Timer) new Timer.Builder()
-                .setName(name)
-                .setAlarmDate(tmpDate)
-                .setNote(note)
-                .setInstrument(instrument)
-                .setVolume(volume)
+                .setName(builder.getName())
+                .setAlarmDate(calendar.getTime())
+                .setNote(builder.getNote())
+                .setInstrument(builder.getInstrument())
+                .setVolume(builder.getVolume())
                 .build();
         new ConsoleTimerController(timer).start();
     }
@@ -176,4 +107,93 @@ public class ConsoleMainMenu {
         new ConsoleStopWatchController(stopWatch).start();
     }
 
+    private static enum DeviceType {
+        TIMER, ALARMCLOCK
+    }
+
+    public static class Builder {
+        private DeviceType deviceType;
+        private String name = "";
+        private int hour = 0;
+        private int minute = 0;
+        private int seconds = 0;
+        private int note = 0;
+        private int instrument = 0;
+        private int volume = 0;
+
+        public Builder(DeviceType deviceType) {
+            this.deviceType = deviceType;
+        }
+
+        public void inputDataToCreateDevice() {
+            boolean notCorrectedDialog = true;
+            Scanner scanner = new Scanner(System.in);
+
+            while (notCorrectedDialog) {
+                try {
+                    System.out.println(Localisation.devicesName() + ":");
+                    name = scanner.nextLine();
+                    if (deviceType == DeviceType.ALARMCLOCK) {
+                        System.out.println(Localisation.selectTimeToAlarmClock());
+                    } else {
+                        System.out.println(Localisation.howManyToTimer());
+                    }
+                    System.out.println(Localisation.hours() + ":");
+                    hour = scanner.nextInt();
+                    System.out.println(Localisation.minutes() + ":");
+                    minute = scanner.nextInt();
+                    System.out.println(Localisation.seconds() + ":");
+                    seconds = scanner.nextInt();
+                    System.out.println(Localisation.noteInstrument());
+                    note = scanner.nextInt();
+                    System.out.println(Localisation.instrumentNumber());
+                    instrument = scanner.nextInt();
+                    System.out.println(Localisation.volume());
+                    volume = scanner.nextInt();
+
+                    if (volume < 0 || volume > 100) notCorrectedDialog = true;
+                    else if (instrument < 1 || instrument > 128) notCorrectedDialog = true;
+                    else if (note < 0 || note > 131) notCorrectedDialog = true;
+                    else if (seconds < 0 || seconds > 59) notCorrectedDialog = true;
+                    else if (minute < 0 || minute > 59) notCorrectedDialog = true;
+                    else notCorrectedDialog = (hour < 0 || (hour > 23 && deviceType == DeviceType.ALARMCLOCK));
+
+
+                } catch (Exception e) {
+                    notCorrectedDialog = true;
+                    scanner = new Scanner(System.in);
+                }
+                if(notCorrectedDialog)  System.out.println(Localisation.notCorrectedData());
+            }
+
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getHour() {
+            return hour;
+        }
+
+        public int getMinute() {
+            return minute;
+        }
+
+        public int getSeconds() {
+            return seconds;
+        }
+
+        public int getNote() {
+            return note;
+        }
+
+        public int getInstrument() {
+            return instrument;
+        }
+
+        public int getVolume() {
+            return volume;
+        }
+    }
 }
