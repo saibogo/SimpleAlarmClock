@@ -18,9 +18,8 @@ public class SupportClass {
     public SupportClass() {
 
         try {
-
-            ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource("./main/resources/electra.ttf").getFile());
+            String pathToFonts = System.getProperty("user.home") + "/.fonts/electra.ttf";
+            File file = new File(pathToFonts);
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, file).deriveFont(18f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);

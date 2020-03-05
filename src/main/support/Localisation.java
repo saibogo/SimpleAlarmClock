@@ -39,7 +39,7 @@ public class Localisation {
     }
 
     public static String versionNumber() {
-        return "0.4";
+        return "0.5";
     }
 
     public static String http() {
