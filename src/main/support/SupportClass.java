@@ -20,7 +20,7 @@ public class SupportClass {
         try {
             String pathToFonts = System.getProperty("user.home") + "/.fonts/electra.ttf";
             File file = new File(pathToFonts);
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, file).deriveFont(18f);
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, file).deriveFont(20f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
             this.font = customFont;

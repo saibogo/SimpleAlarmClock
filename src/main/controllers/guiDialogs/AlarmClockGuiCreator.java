@@ -29,25 +29,32 @@ public class AlarmClockGuiCreator {
         JSpinner spinner = new JSpinner(model);
         frame.add(spinner);
 
-        frame.add(new JLabel(Localisation.volume()));
+        JLabel volumeLabel = new JLabel(Localisation.volume());
+        frame.add(volumeLabel);
         JSlider volume = new JSlider();
         volume.setMaximum(100);
         volume.setMinimum(0);
         volume.setValue(50);
+        volume.addChangeListener(changeEvent -> volumeLabel.setText(volume.getValue() + "%"));
         frame.add(volume);
 
-        frame.add(new JLabel(Localisation.noteInstrument()));
+        JLabel noteLabel = new JLabel(Localisation.noteInstrument());
+        frame.add(noteLabel);
         JSlider note = new JSlider();
         note.setMinimum(0);
         note.setMaximum(131);
         note.setValue(43);
+        note.addChangeListener(changeEvent -> noteLabel.setText(Localisation.noteName(note.getValue())));
         frame.add(note);
 
-        frame.add(new JLabel(Localisation.instrumentNumber()));
+        JLabel instrumentLabel = new JLabel(Localisation.instrumentNumber());
+        frame.add(instrumentLabel);
         JSlider instrument = new JSlider();
         instrument.setMinimum(1);
         instrument.setMaximum(128);
         instrument.setValue(47);
+        instrument.addChangeListener(changeEvent -> instrumentLabel.setText(Localisation
+                .nameInstrument(instrument.getValue())));
         frame.add(instrument);
 
         JButton createButton = new JButton(Localisation.create());

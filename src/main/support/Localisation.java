@@ -177,7 +177,7 @@ public class Localisation {
     }
 
     public static String addTimeToAlarmClockGui(String name) {
-        if (currentLang == Languages.RU) return "Отложить будильник " + name + " на 5 минут?(1 - да)";
+        if (currentLang == Languages.RU) return "Отложить будильник " + name + " на 5 минут?";
         return "Add 5 minutes to Alarm Clock named " + name + "?";
     }
 
@@ -254,6 +254,16 @@ public class Localisation {
     public static String pleaseInterrupt() {
         if (currentLang == Languages.RU) return "Нажмите Ctrl + C для остановки";
         return "Precc Ctrl + C to stopping timer";
+    }
+
+    public static String noteName(int noteCode) {
+        if (currentLang == Languages.RU) return NotesLocalisation.getNoteRu(noteCode);
+        return NotesLocalisation.getNoteEng(noteCode);
+    }
+
+    public static String nameInstrument(int instrumentNumber) {
+        if (currentLang == Languages.RU) return InstrumentLocalisation.getNamesInstrumentRU(instrumentNumber);
+        return InstrumentLocalisation.getNamesInstrumentENG(instrumentNumber);
     }
 
     public enum Languages {

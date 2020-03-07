@@ -1,0 +1,148 @@
+package main.support;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class InstrumentLocalisation {
+
+    private static List<String> instrumentNamesRU;
+    private static List<String> instrumentNamesENG;
+    static {
+        instrumentNamesRU = new ArrayList<>();
+        instrumentNamesRU.add("");
+        instrumentNamesRU.add("Акустический рояль");
+        instrumentNamesRU.add("Яркий рояль");
+        instrumentNamesRU.add("Большой рояль");
+        instrumentNamesRU.add("\"Разбитной\" рояль");
+        instrumentNamesRU.add("Электропианино Родес");
+        instrumentNamesRU.add("Электропианино Хорес");
+        instrumentNamesRU.add("Клавесин");
+        instrumentNamesRU.add("Клавинет");
+        instrumentNamesRU.add("Челеста");
+        instrumentNamesRU.add("Колокольчики");
+        instrumentNamesRU.add("Музыкальная шкатулка");
+        instrumentNamesRU.add("Вибрафон");
+        instrumentNamesRU.add("Маримба");
+        instrumentNamesRU.add("Ксилофон");
+        instrumentNamesRU.add("Колокола");
+        instrumentNamesRU.add("Цимбалы");
+        instrumentNamesRU.add("Орган Хаммонда");
+        instrumentNamesRU.add("Перкуссионный электроорган");
+        instrumentNamesRU.add("Рок орган");
+        instrumentNamesRU.add("Кафедральный орган");
+        instrumentNamesRU.add("Язычковый орган");
+        instrumentNamesRU.add("Аккордеон");
+        instrumentNamesRU.add("Гармоника");
+        instrumentNamesRU.add("Аккордеон танго");
+        instrumentNamesRU.add("Акустическая гитара нейлон");
+        instrumentNamesRU.add("Акустическая гитара металл");
+        instrumentNamesRU.add("Джазовая электрогитара");
+        instrumentNamesRU.add("Чистая электрогитара");
+        instrumentNamesRU.add("Приглушенная электрогитара");
+        instrumentNamesRU.add("Овердрайв гитара");
+        instrumentNamesRU.add("Дисторшен гитара");
+        instrumentNamesRU.add("Гитарные гармоники");
+        instrumentNamesRU.add("Акустический бас");
+        instrumentNamesRU.add("Пальцевый бас");
+        instrumentNamesRU.add("Щипковый бас");
+        instrumentNamesRU.add("Безладовый бас");
+        instrumentNamesRU.add("Слэп бас - 1");
+        instrumentNamesRU.add("Слэп бас - 2");
+        instrumentNamesRU.add("Синтетический бас - 1");
+        instrumentNamesRU.add("Синтетический бас - 2");
+        instrumentNamesRU.add("Скрипка");
+        instrumentNamesRU.add("Альт");
+        instrumentNamesRU.add("Виолончель");
+        instrumentNamesRU.add("Контрабас");
+        instrumentNamesRU.add("Тремоло струнных");
+        instrumentNamesRU.add("Пиццикато струнных");
+        instrumentNamesRU.add("Ансамбль струнных - 1");
+        instrumentNamesRU.add("Ансамбль струнных - 2");
+        instrumentNamesRU.add("Синтетические струнные - 1");
+        instrumentNamesRU.add("синтетические струнные  - 2");
+        instrumentNamesRU.add("Хор \"А\"");
+        instrumentNamesRU.add("Голос \"О\"");
+        instrumentNamesRU.add("Синтетический голос");
+        instrumentNamesRU.add("Оркестровое тутти");
+        instrumentNamesRU.add("Труба");
+        instrumentNamesRU.add("Тромбон");
+        instrumentNamesRU.add("Туба");
+        instrumentNamesRU.add("Труба с сурдиной");
+        instrumentNamesRU.add("Валторна");
+        instrumentNamesRU.add("Медная секция");
+        instrumentNamesRU.add("Синтетическая медь - 1");
+        instrumentNamesRU.add("Синтетическая медь - 2");
+        instrumentNamesRU.add("Саксофон сопрано");
+        instrumentNamesRU.add("Саксофон альт");
+        instrumentNamesRU.add("Саксофон тенор");
+        instrumentNamesRU.add("Саксофон баритон");
+        instrumentNamesRU.add("Гобой");
+        instrumentNamesRU.add("Английский рожок");
+        instrumentNamesRU.add("Фагот");
+        instrumentNamesRU.add("Кларнет");
+        instrumentNamesRU.add("Флейта пикколо");
+        instrumentNamesRU.add("Флейта");
+        instrumentNamesRU.add("Рекордер");
+        instrumentNamesRU.add("Пан-флейта");
+        instrumentNamesRU.add("Бутылочная флейта");
+        instrumentNamesRU.add("Сякухати");
+        instrumentNamesRU.add("Свист");
+        instrumentNamesRU.add("Окарина");
+        instrumentNamesRU.add("Соло прямоугольная волна");
+        instrumentNamesRU.add("Соло пилообразная волна");
+        instrumentNamesRU.add("Соло калиопе");
+        instrumentNamesRU.add("Соло чиф");
+        instrumentNamesRU.add("Соло чаранг");
+        instrumentNamesRU.add("Синтетический голос соло");
+        instrumentNamesRU.add("Яркий пилообразный сигнал");
+        instrumentNamesRU.add("Бас + соло");
+        instrumentNamesRU.add("Фантазия");
+        instrumentNamesRU.add("Накладка теплая");
+        instrumentNamesRU.add("Накладка полисинтезатор");
+        instrumentNamesRU.add("Накладка космическая");
+        instrumentNamesRU.add("Накладка смычковая");
+        instrumentNamesRU.add("Накладка металл");
+        instrumentNamesRU.add("Накладка хало");
+        instrumentNamesRU.add("Накладка изгиб");
+        instrumentNamesRU.add("Ледяной дождь");
+        instrumentNamesRU.add("Саундтрек");
+        instrumentNamesRU.add("Кристалл");
+        instrumentNamesRU.add("Атмосфера");
+        instrumentNamesRU.add("Яркость");
+        instrumentNamesRU.add("Гоблин");
+        instrumentNamesRU.add("Эхо");
+        instrumentNamesRU.add("Звезда");
+        instrumentNamesRU.add("Ситара");
+        instrumentNamesRU.add("Банджо");
+        instrumentNamesRU.add("Сямисен");
+        instrumentNamesRU.add("Кото");
+        instrumentNamesRU.add("Калимба");
+        instrumentNamesRU.add("Волынка");
+        instrumentNamesRU.add("Уличная скрипка");
+        instrumentNamesRU.add("Санай");
+        instrumentNamesRU.add("Звон колокольчика");
+        instrumentNamesRU.add("Агого");
+        instrumentNamesRU.add("Стальные барабаны");
+        instrumentNamesRU.add("Деревянная коробочка");
+        instrumentNamesRU.add("Барабан тайко");
+        instrumentNamesRU.add("Мелодический барабан");
+        instrumentNamesRU.add("Синтетический барабан");
+        instrumentNamesRU.add("Реверсивная тарелка");
+        instrumentNamesRU.add("Звук ладов гитары");
+        instrumentNamesRU.add("Дыхание");
+        instrumentNamesRU.add("Морской прибой");
+        instrumentNamesRU.add("Птичий свист");
+        instrumentNamesRU.add("Телефонный звонок");
+        instrumentNamesRU.add("Вертолет");
+        instrumentNamesRU.add("Аплодисменты");
+        instrumentNamesRU.add("Выстрел");
+    }
+
+    public static String getNamesInstrumentRU(int instrumentNumber) {
+        return instrumentNamesRU.get(instrumentNumber);
+    }
+
+    public static String getNamesInstrumentENG(int instrumentNumber) {
+        return getNamesInstrumentRU(instrumentNumber);
+    }
+}
