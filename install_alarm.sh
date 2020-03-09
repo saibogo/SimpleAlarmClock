@@ -9,6 +9,14 @@ then
     rm -R *
     cd ../src || exit
     javac -verbose -d ../build Main.java
+
+    if find ~/.fonts -name *
+        then echo "Directory ~/.fonts already exist"
+        else
+            echo "Create directory ~/.fonts"
+            mkdir ~/.fonts/
+    fi
+
     cp main/resources/electra.ttf ~/.fonts
     cd ..
     command1='java -classpath '`pwd`/build' Main $@'
@@ -24,7 +32,12 @@ then
             echo $desktopFile" Found. Removing it."
             rm $desktopFile
     fi
+    
     echo $desktopFile" Create"
+    if ! [ -d ~/.local/share/applications/ ]
+        then mkdir ~/.local/share/applications/
+    fi
+
     touch $desktopFile
     echo '[Desktop Entry]' >> $desktopFile
     echo 'Type=Application' >> $desktopFile
