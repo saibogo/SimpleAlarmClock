@@ -157,8 +157,8 @@ public class Localisation {
     }
 
     public static String instrumentNumber() {
-        if (currentLang == Languages.RU) return "Номер музыкального инструмента (от 1 до 128 включительно)";
-        return "Music instrument number (in range 1...128)";
+        if (currentLang == Languages.RU) return "Номер музыкального инструмента (от 1 до 174 включительно)";
+        return "Music instrument number (in range 1...174)";
     }
 
     public static String volume() {

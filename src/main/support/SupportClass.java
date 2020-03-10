@@ -11,6 +11,7 @@ import java.util.StringJoiner;
 public class SupportClass {
 
     public static final String timeSeparator = ":";
+    public static int normalInstrumentMaxNumber = 128;
     private static final String zeroString = "0";
 
     private  Font font;

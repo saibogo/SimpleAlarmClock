@@ -3,6 +3,7 @@ package main.controllers.consoleControllers;
 import main.models.clockModels.AlarmClock;
 import main.models.clockModels.StopWatch;
 import main.models.clockModels.Timer;
+import main.support.InstrumentLocalisation;
 import main.support.Localisation;
 
 import java.util.Calendar;
@@ -107,7 +108,7 @@ public class ConsoleMainMenu {
         new ConsoleStopWatchController(stopWatch).start();
     }
 
-    private static enum DeviceType {
+    private enum DeviceType {
         TIMER, ALARMCLOCK
     }
 
@@ -152,7 +153,8 @@ public class ConsoleMainMenu {
                     volume = scanner.nextInt();
 
                     if (volume < 0 || volume > 100) notCorrectedDialog = true;
-                    else if (instrument < 1 || instrument > 128) notCorrectedDialog = true;
+                    else if (instrument < 1 || instrument > InstrumentLocalisation.getMaximalInstrumentNumber())
+                        notCorrectedDialog = true;
                     else if (note < 0 || note > 131) notCorrectedDialog = true;
                     else if (seconds < 0 || seconds > 59) notCorrectedDialog = true;
                     else if (minute < 0 || minute > 59) notCorrectedDialog = true;

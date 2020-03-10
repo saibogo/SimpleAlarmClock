@@ -25,8 +25,7 @@ public class GuiTimerThread extends Thread {
 
                 }
             }
-
-            this.guiTimer.updateLabel();
+            if (this.guiTimer.getTimerController() != null) this.guiTimer.updateLabel();
 
             try {
                 Thread.sleep(1000);

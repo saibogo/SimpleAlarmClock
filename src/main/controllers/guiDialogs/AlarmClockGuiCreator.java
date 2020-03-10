@@ -2,6 +2,7 @@ package main.controllers.guiDialogs;
 
 import main.models.clockModels.ClockUniversalModel;
 import main.models.clockModels.AlarmClock;
+import main.support.InstrumentLocalisation;
 import main.support.Localisation;
 
 import javax.swing.*;
@@ -51,7 +52,7 @@ public class AlarmClockGuiCreator {
         frame.add(instrumentLabel);
         JSlider instrument = new JSlider();
         instrument.setMinimum(1);
-        instrument.setMaximum(128);
+        instrument.setMaximum(InstrumentLocalisation.getMaximalInstrumentNumber());
         instrument.setValue(47);
         instrument.addChangeListener(changeEvent -> instrumentLabel.setText(Localisation
                 .nameInstrument(instrument.getValue())));

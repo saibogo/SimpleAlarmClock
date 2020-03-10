@@ -36,13 +36,16 @@ public class GuiTimer extends JFrame {
 
 
     public void updateLabel() {
+        try {
+            long first = this.timerController.getTimer().getTimeTriplet().getFirst();
+            long second = this.timerController.getTimer().getTimeTriplet().getSecond();
+            long last = this.timerController.getTimer().getTimeTriplet().getLast();
 
-        long first = this.timerController.getTimer().getTimeTriplet().getFirst();
-        long second = this.timerController.getTimer().getTimeTriplet().getSecond();
-        long last = this.timerController.getTimer().getTimeTriplet().getLast();
+            this.timerLabel.setText(SupportClass.timeToString3(first, second, last));
+            this.panel.updateUI();
+        } catch (NullPointerException ignored) {
 
-        this.timerLabel.setText(SupportClass.timeToString3(first, second, last));
-        this.panel.updateUI();
+        }
     }
 
 

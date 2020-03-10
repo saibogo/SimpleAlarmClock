@@ -2,6 +2,7 @@ package main.models.clockModels;
 
 import main.models.supportModels.Triplet;
 import main.myException.TripletBuildException;
+import main.support.SupportClass;
 
 import javax.sound.midi.MidiChannel;
 import javax.sound.midi.MidiSystem;
@@ -90,11 +91,14 @@ public class AlarmClock {
     public void sayBeep() {
         try {
             if (!this.stoppedStatus) {
-                channels[0].programChange(this.instrument);
-                channels[0].noteOn(this.note, this.volume);
+                int channelNumber = this.instrument <= SupportClass.normalInstrumentMaxNumber ? 0 : 10;
+                int instrumentNumber = channelNumber == 10 ?
+                        this.instrument - SupportClass.normalInstrumentMaxNumber + 35 : this.instrument;
+                channels[channelNumber].programChange(instrumentNumber);
+                channels[channelNumber].noteOn(this.note, this.volume);
                 int TIME_SOUND = 750;
                 Thread.sleep(TIME_SOUND); // in milliseconds
-                channels[0].noteOff(this.note);
+                channels[channelNumber].noteOff(this.note);
             }
         }  catch (InterruptedException ignored) {
         }

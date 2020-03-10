@@ -4,6 +4,7 @@ import main.controllers.TimerController;
 import main.controllers.guiControllers.GuiTimer;
 import main.controllers.guiControllers.GuiTimerThread;
 import main.models.clockModels.Timer;
+import main.support.InstrumentLocalisation;
 import main.support.Localisation;
 
 import javax.swing.*;
@@ -64,25 +65,32 @@ public class GuiCreatorTimer extends JFrame {
         this.add(seconds);
         this.add(secondsSpinner);
 
-        this.add(new JLabel(Localisation.volume()));
+        JLabel volumeLabel = new JLabel(Localisation.volume());
+        this.add(volumeLabel);
         JSlider volume = new JSlider();
         volume.setMaximum(100);
         volume.setMinimum(0);
         volume.setValue(50);
+        volume.addChangeListener(changeEvent -> volumeLabel.setText(volume.getValue() + "%"));
         this.add(volume);
 
-        this.add(new JLabel(Localisation.noteInstrument()));
+        JLabel noteLabel = new JLabel(Localisation.noteInstrument());
+        this.add(noteLabel);
         JSlider note = new JSlider();
         note.setMinimum(0);
         note.setMaximum(131);
         note.setValue(43);
+        note.addChangeListener(changeEvent -> noteLabel.setText(Localisation.noteName(note.getValue())));
         this.add(note);
 
-        this.add(new JLabel(Localisation.instrumentNumber()));
+        JLabel instrumentLabel = new JLabel(Localisation.instrumentNumber());
+        this.add(instrumentLabel);
         JSlider instrument = new JSlider();
         instrument.setMinimum(1);
-        instrument.setMaximum(128);
+        instrument.setMaximum(InstrumentLocalisation.getMaximalInstrumentNumber());
         instrument.setValue(47);
+        instrument.addChangeListener(changeEvent -> instrumentLabel
+                .setText(Localisation.nameInstrument(instrument.getValue())));
         this.add(instrument);
 
 
