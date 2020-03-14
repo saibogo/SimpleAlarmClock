@@ -3,6 +3,7 @@ package main.controllers.consoleControllers;
 import main.models.clockModels.AlarmClock;
 import main.models.clockModels.StopWatch;
 import main.models.clockModels.Timer;
+import main.support.DevicesType;
 import main.support.InstrumentLocalisation;
 import main.support.Localisation;
 
@@ -58,7 +59,7 @@ public class ConsoleMainMenu {
     }
 
     public static void createAlarmClock() {
-        Builder builder = new Builder(DeviceType.ALARMCLOCK);
+        Builder builder = new Builder(DevicesType.ALARMCLOCK);
         builder.inputDataToCreateDevice();
 
         Calendar calendar = Calendar.getInstance();
@@ -82,7 +83,7 @@ public class ConsoleMainMenu {
     }
 
     private static void createTimer() {
-        Builder builder = new Builder(DeviceType.TIMER);
+        Builder builder = new Builder(DevicesType.TIMER);
         builder.inputDataToCreateDevice();
 
         Calendar calendar = Calendar.getInstance();
@@ -108,12 +109,9 @@ public class ConsoleMainMenu {
         new ConsoleStopWatchController(stopWatch).start();
     }
 
-    private enum DeviceType {
-        TIMER, ALARMCLOCK
-    }
 
     public static class Builder {
-        private DeviceType deviceType;
+        private DevicesType deviceType;
         private String name = "";
         private int hour = 0;
         private int minute = 0;
@@ -122,7 +120,7 @@ public class ConsoleMainMenu {
         private int instrument = 0;
         private int volume = 0;
 
-        public Builder(DeviceType deviceType) {
+        public Builder(DevicesType deviceType) {
             this.deviceType = deviceType;
         }
 
@@ -134,7 +132,7 @@ public class ConsoleMainMenu {
                 try {
                     System.out.println(Localisation.devicesName() + ":");
                     name = scanner.nextLine();
-                    if (deviceType == DeviceType.ALARMCLOCK) {
+                    if (deviceType == DevicesType.ALARMCLOCK) {
                         System.out.println(Localisation.selectTimeToAlarmClock());
                     } else {
                         System.out.println(Localisation.howManyToTimer());
@@ -158,7 +156,7 @@ public class ConsoleMainMenu {
                     else if (note < 0 || note > 131) notCorrectedDialog = true;
                     else if (seconds < 0 || seconds > 59) notCorrectedDialog = true;
                     else if (minute < 0 || minute > 59) notCorrectedDialog = true;
-                    else notCorrectedDialog = (hour < 0 || (hour > 23 && deviceType == DeviceType.ALARMCLOCK));
+                    else notCorrectedDialog = (hour < 0 || (hour > 23 && deviceType == DevicesType.ALARMCLOCK));
 
 
                 } catch (Exception e) {

@@ -1,11 +1,12 @@
 package main.controllers.guiControllers;
 
 import main.controllers.AlarmClockController;
-import main.controllers.guiDialogs.AlarmClockGuiCreator;
 import main.models.clockModels.ClockUniversalModel;
 import main.controllers.guiDialogs.SelectToRemoveAlarmClockGui;
+import main.models.supportModels.GuiCreatorModel;
 import main.models.supportModels.Triplet;
 import main.myException.TripletBuildException;
+import main.support.DevicesType;
 import main.support.Localisation;
 import main.support.SupportClass;
 
@@ -53,7 +54,7 @@ public class GuiClock extends JFrame {
 
     private JButton createButtonAddAlarmClock() {
         JButton button = new JButton("+");
-        button.addActionListener(actionEvent -> AlarmClockGuiCreator.create(model));
+        button.addActionListener(actionEvent -> new GuiCreatorModel(DevicesType.ALARMCLOCK, model));
         button.setToolTipText(Localisation.addAlarmClock());
         return button;
     }

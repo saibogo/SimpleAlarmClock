@@ -3,6 +3,8 @@ package main.controllers.guiDialogs;
 import main.controllers.StopWatchController;
 import main.controllers.guiControllers.GuiStopWatchThread;
 import main.models.clockModels.StopWatch;
+import main.models.supportModels.GuiCreatorModel;
+import main.support.DevicesType;
 import main.support.Localisation;
 
 import javax.swing.*;
@@ -25,7 +27,7 @@ public class MainSelectedMenu extends JFrame {
         timerButton.setVisible(true);
         timerButton.addActionListener(actionEvent -> {
             MainSelectedMenu.this.dispose();
-            new GuiCreatorTimer();
+            new GuiCreatorModel(DevicesType.TIMER);
         });
 
         JButton stopWatchButton = new JButton(Localisation.stopWatch());
