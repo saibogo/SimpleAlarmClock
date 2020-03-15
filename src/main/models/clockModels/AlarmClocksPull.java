@@ -37,4 +37,10 @@ public class AlarmClocksPull {
     public int size() {
         return this.alarmClockList.size();
     }
+
+    public AlarmClock getLast() {
+        if (this.alarmClockList.isEmpty())
+            return null;
+        return this.alarmClockList.get(this.alarmClockList.size() - 1);
+    }
 }

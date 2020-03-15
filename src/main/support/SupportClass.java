@@ -12,6 +12,11 @@ public class SupportClass {
 
     public static final String timeSeparator = ":";
     public static int normalInstrumentMaxNumber = 128;
+
+    public static Color clockColor = Color.MAGENTA;
+    public static Color alarmClockColor = Color.CYAN;
+    public static Color buttonColor = new Color(169, 169, 169);
+    public static Color panelColor = new Color(192, 192, 192);
     private static final String zeroString = "0";
 
     private  Font font;
@@ -32,15 +37,30 @@ public class SupportClass {
 
 
     public void setCustomUI() {
-        UIManager.getDefaults().put("Button.font", font);
         UIManager.getDefaults().put("Label.font", font);
-        UIManager.getDefaults().put("Panel.font", font);
+
+        UIManager.getDefaults().put("TextField.background", panelColor);
         UIManager.getDefaults().put("TextField.font", font);
+
+        UIManager.getDefaults().put("Button.font", font);
+        UIManager.getDefaults().put("Button.border", new SupportClass.RoundedBorder(10));
+        UIManager.getDefaults().put("Button.background", SupportClass.buttonColor);
+
+        UIManager.getDefaults().put("Panel.background", panelColor);
+        UIManager.getDefaults().put("Panel.font", font);
+
+        UIManager.getDefaults().put("Spinner.background", panelColor);
         UIManager.getDefaults().put("Spinner.font", font);
+
+        UIManager.getDefaults().put("Slider.background", panelColor);
         UIManager.getDefaults().put("Slider.font", font);
+
+        UIManager.getDefaults().put("OptionPane.background", panelColor);
         UIManager.getDefaults().put("OptionPane.font", font);
 
-        UIManager.getDefaults().put("Button.border", new SupportClass.RoundedBorder(10));
+        UIManager.getDefaults().put("NumberEditor.background", panelColor);
+
+
     }
 
 

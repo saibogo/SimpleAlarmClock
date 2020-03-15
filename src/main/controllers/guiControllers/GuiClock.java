@@ -17,6 +17,8 @@ import java.util.List;
 
 public class GuiClock extends JFrame {
 
+    private static int columns = 5;
+
     private final ClockUniversalModel model;
     private final JPanel panel;
     private List<JLabel> labelList;
@@ -30,20 +32,26 @@ public class GuiClock extends JFrame {
         this.labelList = new ArrayList<>();
         this.setTitle(Localisation.alarmClock());
 
-        JPanel buttonPanel = new JPanel(new GridLayout(0, 2));
+        JPanel buttonPanel = new JPanel(new GridLayout(0, columns));
         buttonPanel.setVisible(true);
 
         JButton createButton = createButtonAddAlarmClock();
         this.deleteButton = createButtonRemoveAlarmClock();
 
         createButton.setVisible(true);
+
+        buttonPanel.add(new JLabel());
         buttonPanel.add(createButton);
+        buttonPanel.add(new JLabel());
         buttonPanel.add(deleteButton);
+        buttonPanel.add(new JLabel());
 
         this.panel.add(buttonPanel);
 
         this.updatePanel();
-        this.labelList.get(0).setForeground(Color.BLUE);
+        this.labelList.get(0).setForeground(SupportClass.clockColor);
+        this.labelList.get(0).setHorizontalAlignment(SwingConstants.CENTER);
+        this.labelList.get(0).setToolTipText(model.getClock().getName());
 
         this.add(this.panel, BorderLayout.CENTER);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,9 +90,14 @@ public class GuiClock extends JFrame {
             for (JLabel label: this.labelList)this.panel.remove(label);
 
             if (clockCount > this.labelList.size()) {
-            this.labelList.add(new JLabel());
-            this.labelList.get(this.labelList.size() - 1).setForeground(Color.PINK);
-
+                this.labelList.add(new JLabel());
+                int lastLabelIndex = this.labelList.size() - 1;
+                this.labelList.get(lastLabelIndex).setHorizontalAlignment(SwingConstants.CENTER);
+                this.labelList.get(lastLabelIndex).setForeground(SupportClass.alarmClockColor);
+                if (clockCount != 1) {
+                    this.labelList.get(lastLabelIndex).setToolTipText(this.model.getAlarmClocksPullController()
+                            .getAlarmClocks().getLast().getName());
+                }
             } else {
                 while (clockCount < this.labelList.size()) this.labelList.remove(clockCount);
             }

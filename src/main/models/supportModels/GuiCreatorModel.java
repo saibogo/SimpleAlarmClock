@@ -8,6 +8,7 @@ import main.models.clockModels.ClockUniversalModel;
 import main.models.clockModels.Timer;
 import main.support.DevicesType;
 import main.support.Localisation;
+import main.support.SupportClass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,6 +56,7 @@ public class GuiCreatorModel{
             long addMsToAlarm = 300000L;
             model.setValue(new Date(System.currentTimeMillis() + addMsToAlarm));
             JSpinner spinner = new JSpinner(model);
+            spinner.getEditor().getComponent(0).setBackground(SupportClass.panelColor);
             nameAndDataPanel.add(spinner);
 
         } else if (devicesType == DevicesType.TIMER) {
@@ -71,6 +73,7 @@ public class GuiCreatorModel{
             hoursModel.setMinimum(0);
             hoursModel.setMaximum(99);
             hoursSpinner.setModel(hoursModel);
+            hoursSpinner.getEditor().getComponent(0).setBackground(SupportClass.panelColor);
             hoursSpinner.setVisible(true);
             nameAndDataPanel.add(hours);
             nameAndDataPanel.add(hoursSpinner);
@@ -81,6 +84,7 @@ public class GuiCreatorModel{
             minutesModel.setMinimum(0);
             minutesModel.setMaximum(1000);
             minutesSpinner.setModel(minutesModel);
+            minutesSpinner.getEditor().getComponent(0).setBackground(SupportClass.panelColor);
             minutesSpinner.setVisible(true);
             nameAndDataPanel.add(minutes);
             nameAndDataPanel.add(minutesSpinner);
@@ -91,6 +95,7 @@ public class GuiCreatorModel{
             secondsModel.setMinimum(0);
             secondsModel.setMaximum(1000);
             secondsSpinner.setModel(secondsModel);
+            secondsSpinner.getEditor().getComponent(0).setBackground(SupportClass.panelColor);
             secondsSpinner.setVisible(true);
             nameAndDataPanel.add(seconds);
             nameAndDataPanel.add(secondsSpinner);
