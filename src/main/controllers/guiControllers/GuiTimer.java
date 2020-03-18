@@ -1,10 +1,13 @@
 package main.controllers.guiControllers;
 
+import main.controllers.GuiStarter;
 import main.controllers.TimerController;
 import main.support.SupportClass;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GuiTimer extends JFrame {
 
@@ -28,7 +31,13 @@ public class GuiTimer extends JFrame {
         this.add(this.panel);
 
         this.pack();
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dispose();
+                GuiStarter.startGui();
+            }
+        });
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 

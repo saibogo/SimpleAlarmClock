@@ -1,8 +1,10 @@
 package main.models.supportModels;
 
+import main.controllers.GuiStarter;
 import main.controllers.TimerController;
 import main.controllers.guiControllers.GuiTimer;
 import main.controllers.guiControllers.GuiTimerThread;
+import main.controllers.guiDialogs.MainSelectedMenu;
 import main.models.clockModels.AlarmClock;
 import main.models.clockModels.ClockUniversalModel;
 import main.models.clockModels.Timer;
@@ -12,6 +14,8 @@ import main.support.SupportClass;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Date;
 
 public class GuiCreatorModel{
@@ -43,7 +47,18 @@ public class GuiCreatorModel{
         JFrame frame = new JFrame(devicesType == DevicesType.ALARMCLOCK ?
                 Localisation.addAlarmClock() : Localisation.timerParameters());
         frame.setLayout(new GridLayout(0, 1));
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        if (devicesType == DevicesType.TIMER) {
+            frame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    frame.dispose();
+                    GuiStarter.startGui();
+                }
+            });
+        } else if (devicesType == DevicesType.ALARMCLOCK) {
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        }
 
 
         JPanel nameAndDataPanel = new JPanel(new GridLayout(0 , 2));

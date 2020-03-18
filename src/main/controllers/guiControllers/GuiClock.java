@@ -1,6 +1,7 @@
 package main.controllers.guiControllers;
 
 import main.controllers.AlarmClockController;
+import main.controllers.GuiStarter;
 import main.models.clockModels.ClockUniversalModel;
 import main.controllers.guiDialogs.SelectToRemoveAlarmClockGui;
 import main.models.supportModels.GuiCreatorModel;
@@ -12,6 +13,8 @@ import main.support.SupportClass;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +57,17 @@ public class GuiClock extends JFrame {
         this.labelList.get(0).setToolTipText(model.getClock().getName());
 
         this.add(this.panel, BorderLayout.CENTER);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dispose();
+                while(model.getAlarmClocksPullController().size() > 0) {
+                    model.getAlarmClocksPullController().getControllers().get(0).stopAlarmClock();
+                    model.removeAlarmClockController(0);
+                }
+                GuiStarter.startGui();
+            }
+        });
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 

@@ -1,11 +1,14 @@
 package main.controllers.guiControllers;
 
+import main.controllers.GuiStarter;
 import main.controllers.StopWatchController;
 import main.support.Localisation;
 import main.support.SupportClass;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GuiStopWatch extends JFrame {
 
@@ -16,7 +19,14 @@ public class GuiStopWatch extends JFrame {
     public GuiStopWatch(StopWatchController controller) throws HeadlessException {
         this.controller = controller;
         this.isRunning = true;
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dispose();
+                controller.stopStopWatch();
+                GuiStarter.startGui();
+            }
+        });
         this.setTitle(Localisation.stopWatch());
         this.setLocationRelativeTo(null);
         this.setLayout(new GridLayout(0, 1));
@@ -29,7 +39,8 @@ public class GuiStopWatch extends JFrame {
             String msg = Localisation.stopWatchTimeScaled() + ":\n" + this.labelWatch.getText();
             JOptionPane.showMessageDialog(new JFrame(), msg, Localisation.stopWatchValues(),
                     JOptionPane.INFORMATION_MESSAGE);
-            System.exit(0);
+            dispose();
+            GuiStarter.startGui();
         });
 
         this.labelWatch = new JLabel();

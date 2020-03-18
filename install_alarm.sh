@@ -38,6 +38,8 @@ then
         then mkdir ~/.local/share/applications/
     fi
 
+    iconfile=`pwd`/alarmClock.png
+
     touch $desktopFile
     echo '[Desktop Entry]' >> $desktopFile
     echo 'Type=Application' >> $desktopFile
@@ -45,6 +47,7 @@ then
     echo 'Name=Simple Alarm Clock' >> $desktopFile
     echo 'Comment=Alarm clock, Timer and Stop Watch' >> $desktopFile
     echo 'Exec=java -classpath '`pwd`'/build Main' >> $desktopFile
+    echo 'Icon='$iconfile >> $desktopFile
     echo 'Terminal=false' >> $desktopFile
 
 
