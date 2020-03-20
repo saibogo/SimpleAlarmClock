@@ -1,9 +1,12 @@
 package main.controllers.guiControllers;
 
+import main.controllers.GuiStarter;
 import main.support.Localisation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GuiTimerThread extends Thread {
 
@@ -45,7 +48,12 @@ public class GuiTimerThread extends Thread {
         public GuiTimerKiller() throws HeadlessException {
             this.setLayout(new GridLayout(0, 1));
             this.setTitle(Localisation.alarmMessage());
-            this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    closingWindow();
+                }
+            });
 
             JLabel label = new JLabel(Localisation.timerSayBeep(GuiTimerThread.this.guiTimer
                     .getTimerController().getTimer().getName()));
@@ -53,19 +61,23 @@ public class GuiTimerThread extends Thread {
             this.add(label);
 
             JButton cancelButton = new JButton(Localisation.stopTimerSignal());
-            cancelButton.addActionListener(actionEvent -> {
-                GuiTimerThread.this.guiTimer.getTimerController().stopTimer();
-                GuiTimerThread.this.interrupt();
-                GuiTimerThread.this.guiTimer.dispose();
-                GuiTimerThread.this.guiTimer = null;
-                System.exit(0);
-            });
+            cancelButton.addActionListener(actionEvent -> closingWindow());
             cancelButton.setVisible(true);
             this.add(cancelButton);
 
             this.pack();
             this.setLocationRelativeTo(null);
             this.setVisible(true);
+        }
+
+        private void closingWindow() {
+            GuiTimerThread.this.guiTimer.getTimerController().stopTimer();
+            GuiTimerThread.this.interrupt();
+            GuiTimerThread.this.guiTimer.dispose();
+            guiTimer.dispose();
+            GuiTimerThread.this.guiTimer = null;
+            dispose();
+            GuiStarter.startGui();
         }
     }
 }
