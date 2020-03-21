@@ -22,6 +22,8 @@ public class GuiTimer extends JFrame {
         this.setTitle(this.timerController.getTimer().getName());
         this.panel = new JPanel();
 
+        this.setIconImage(SupportClass.getImageIcon());
+
 
         this.timerLabel = new JLabel();
         this.timerLabel.setVisible(true);

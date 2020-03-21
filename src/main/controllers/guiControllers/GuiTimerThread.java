@@ -2,6 +2,7 @@ package main.controllers.guiControllers;
 
 import main.controllers.GuiStarter;
 import main.support.Localisation;
+import main.support.SupportClass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,6 +49,8 @@ public class GuiTimerThread extends Thread {
         public GuiTimerKiller() throws HeadlessException {
             this.setLayout(new GridLayout(0, 1));
             this.setTitle(Localisation.alarmMessage());
+            this.setIconImage(SupportClass.getImageIcon());
+
             this.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {

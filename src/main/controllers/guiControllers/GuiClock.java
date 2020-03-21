@@ -34,6 +34,7 @@ public class GuiClock extends JFrame {
         this.panel = new JPanel(new GridLayout(0, 1));
         this.labelList = new ArrayList<>();
         this.setTitle(Localisation.alarmClock());
+        this.setIconImage(SupportClass.getImageIcon());
 
         JPanel buttonPanel = new JPanel(new GridLayout(0, columns));
         buttonPanel.setVisible(true);

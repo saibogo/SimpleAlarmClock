@@ -47,6 +47,7 @@ public class GuiCreatorModel{
         JFrame frame = new JFrame(devicesType == DevicesType.ALARMCLOCK ?
                 Localisation.addAlarmClock() : Localisation.timerParameters());
         frame.setLayout(new GridLayout(0, 1));
+        frame.setIconImage(SupportClass.getImageIcon());
 
         if (devicesType == DevicesType.TIMER) {
             frame.addWindowListener(new WindowAdapter() {

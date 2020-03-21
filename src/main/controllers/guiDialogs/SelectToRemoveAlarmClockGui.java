@@ -3,6 +3,7 @@ package main.controllers.guiDialogs;
 import main.models.clockModels.ClockUniversalModel;
 import main.controllers.AlarmClockController;
 import main.support.Localisation;
+import main.support.SupportClass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,8 @@ public class SelectToRemoveAlarmClockGui {
     public static void selectAlarmClockDialog(ClockUniversalModel model) {
 
         JFrame frame = new JFrame(Localisation.selectAlarmClockToRemove());
+        frame.setIconImage(SupportClass.getImageIcon());
+        frame.setLocationRelativeTo(null);
         List<String> alarmClockList = new ArrayList<>();
         for (AlarmClockController item: model.getAlarmClocksPullController().getControllers()) {
             alarmClockList.add(item.getAlarmClock().getName() + " -> " + item.getAlarmClock().getAlarmDate());

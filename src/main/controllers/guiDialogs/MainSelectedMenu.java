@@ -6,6 +6,7 @@ import main.models.clockModels.StopWatch;
 import main.models.supportModels.GuiCreatorModel;
 import main.support.DevicesType;
 import main.support.Localisation;
+import main.support.SupportClass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +16,7 @@ public class MainSelectedMenu extends JFrame {
     public MainSelectedMenu() {
         this.setLayout(new GridLayout(0, 1));
         this.setTitle(Localisation.selectDevice());
+        this.setIconImage(SupportClass.getImageIcon());
 
         JButton alarmClockButton = new JButton(Localisation.alarmClock());
         alarmClockButton.addActionListener(actionEvent -> {
@@ -43,6 +45,12 @@ public class MainSelectedMenu extends JFrame {
         infoButton.setVisible(true);
         infoButton.addActionListener(actionEvent -> GuiInformation.showProductionInfo());
 
+        JButton exitButton = new JButton(Localisation.exitString());
+        exitButton.setVisible(true);
+        exitButton.addActionListener(actionEvent -> {
+            System.exit(0);
+        });
+
         JButton changeLanguageButton = new JButton(Localisation.changeLanguage());
         changeLanguageButton.setVisible(true);
         changeLanguageButton.addActionListener(actionEvent -> {
@@ -57,14 +65,17 @@ public class MainSelectedMenu extends JFrame {
             stopWatchButton.setText(Localisation.stopWatch());
             infoButton.setText(Localisation.information());
             changeLanguageButton.setText(Localisation.changeLanguage());
+            exitButton.setText(Localisation.exitString());
             this.pack();
         });
+
 
         this.add(alarmClockButton);
         this.add(timerButton);
         this.add(stopWatchButton);
         this.add(infoButton);
         this.add(changeLanguageButton);
+        this.add(exitButton);
         this.pack();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);

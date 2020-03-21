@@ -12,9 +12,10 @@ public class SupportClass {
 
     public static final String timeSeparator = ":";
     public static int normalInstrumentMaxNumber = 128;
+    private static Image image = null;
 
-    public static Color clockColor = Color.MAGENTA;
-    public static Color alarmClockColor = Color.CYAN;
+    public static Color clockColor = new Color(169, 31, 24);
+    public static Color alarmClockColor = new Color(35, 41, 169);
     public static Color buttonColor = new Color(169, 169, 169);
     public static Color panelColor = new Color(192, 192, 192);
     private static final String zeroString = "0";
@@ -32,6 +33,21 @@ public class SupportClass {
             this.font = customFont;
         } catch (FontFormatException | IOException | NullPointerException e) {
             this.font = new Font(Font.MONOSPACED, Font.BOLD, 20);
+        }
+
+        try {
+            String os = System.getProperty("os.name");
+            String pathToIcon = System.getProperty("user.home");
+            if (os.equals("Linux")) {
+                pathToIcon = pathToIcon + "/.local/share/icons/alarmClock.png";
+            } else {
+                pathToIcon = pathToIcon + "/alarmClock.png";
+            }
+            File iconFile = new File(pathToIcon);
+            ImageIcon imageIcon = new ImageIcon(String.valueOf(iconFile));
+            image = imageIcon.getImage();
+        } catch (Exception e) {
+            image = null;
         }
     }
 
@@ -61,6 +77,10 @@ public class SupportClass {
         UIManager.getDefaults().put("NumberEditor.background", panelColor);
 
 
+    }
+
+    public static Image getImageIcon() {
+        return image;
     }
 
 

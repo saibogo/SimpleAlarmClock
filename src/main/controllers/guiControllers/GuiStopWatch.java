@@ -28,6 +28,7 @@ public class GuiStopWatch extends JFrame {
             }
         });
         this.setTitle(Localisation.stopWatch());
+        this.setIconImage(SupportClass.getImageIcon());
         this.setLocationRelativeTo(null);
         this.setLayout(new GridLayout(0, 1));
 
@@ -36,8 +37,10 @@ public class GuiStopWatch extends JFrame {
         stopButton.addActionListener(actionEvent -> {
             this.isRunning = false;
             this.updateLabel();
+            JFrame messageFrame = new JFrame();
+            messageFrame.setIconImage(SupportClass.getImageIcon());
             String msg = Localisation.stopWatchTimeScaled() + ":\n" + this.labelWatch.getText();
-            JOptionPane.showMessageDialog(new JFrame(), msg, Localisation.stopWatchValues(),
+            JOptionPane.showMessageDialog(messageFrame, msg, Localisation.stopWatchValues(),
                     JOptionPane.INFORMATION_MESSAGE);
             dispose();
             GuiStarter.startGui();

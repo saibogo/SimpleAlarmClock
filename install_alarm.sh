@@ -10,6 +10,15 @@ then
     cd ../src || exit
     javac -verbose -d ../build Main.java
 
+    if find ~/.local/share/icons -name *
+        then echo "Directory for ~/.local/share/icons already exist"
+        else 
+            echo "Create directory ~/.local/share/icons"
+            mkdir --verbose ~/.local/share/icons
+    fi
+
+    cp ../alarmClock.png ~/.local/share/icons
+
     if find ~/.fonts -name *
         then echo "Directory ~/.fonts already exist"
         else
@@ -38,7 +47,7 @@ then
         then mkdir ~/.local/share/applications/
     fi
 
-    iconfile=`pwd`/alarmClock.png
+    iconfile=~/.local/share/icons/alarmClock.png
 
     touch $desktopFile
     echo '[Desktop Entry]' >> $desktopFile
