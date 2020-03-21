@@ -66,6 +66,7 @@ public class GuiClock extends JFrame {
                     model.getAlarmClocksPullController().getControllers().get(0).stopAlarmClock();
                     model.removeAlarmClockController(0);
                 }
+                System.gc();
                 GuiStarter.startGui();
             }
         });

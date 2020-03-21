@@ -36,7 +36,9 @@ public class GuiTimer extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                timerController.stopTimer();
                 dispose();
+                System.gc();
                 GuiStarter.startGui();
             }
         });

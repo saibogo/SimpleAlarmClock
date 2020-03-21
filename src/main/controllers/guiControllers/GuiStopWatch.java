@@ -43,6 +43,7 @@ public class GuiStopWatch extends JFrame {
             JOptionPane.showMessageDialog(messageFrame, msg, Localisation.stopWatchValues(),
                     JOptionPane.INFORMATION_MESSAGE);
             dispose();
+            System.gc();
             GuiStarter.startGui();
         });
 

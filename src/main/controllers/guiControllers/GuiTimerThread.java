@@ -21,16 +21,20 @@ public class GuiTimerThread extends Thread {
     @Override
     public void run() {
         while (true) {
-            if (guiTimer.getTimerController().getTimer().alarmIsRun()) {
-                guiTimer.getTimerController().getTimer().sayBeep();
-                if (!dialogCreated) {
-                    dialogCreated = true;
-                    new GuiTimerKiller();
+            try {
+                if (guiTimer.getTimerController().getTimer().alarmIsRun()) {
+                    guiTimer.getTimerController().getTimer().sayBeep();
+                    if (!dialogCreated) {
+                        dialogCreated = true;
+                        new GuiTimerKiller();
 
+                    }
                 }
-            }
-            if (this.guiTimer.getTimerController() != null) this.guiTimer.updateLabel();
+                if (this.guiTimer.getTimerController() != null) this.guiTimer.updateLabel();
 
+            } catch (NullPointerException ignored) {
+
+            }
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
