@@ -5,15 +5,20 @@
     background-color:LavenderBlush;
     font-family: Georgia, 'Times New Roman', Times, serif;
     background-image: url("../images/background.jpg");
+    background-size:cover;
     font-family: 'Noto Sans TC', sans-serif;
+    color: Maroon;
+    border-color: Peru;
 }
 
    
 
 h1 {
     text-align: center;
-    color: DarkSlateBlue;
+    color: MidnightBlue;
     text-shadow: 5px 3px 3px Gray;
+    background-image: none;
+    background-color: transparent;
 }
 
 .row {
@@ -43,6 +48,7 @@ img {
 img:hover {
     width: 110px;
     height: 110px;
+    transition: width 1.5s, height 1.5s;
 }
 
 .screenshots:hover {
@@ -54,7 +60,6 @@ img:hover {
 p {
     background-color:Aquamarine;
     border-style: solid;
-    border-color: black;
     border-width: 1px;
     padding: 5px;
     width: 97%;
@@ -64,27 +69,27 @@ p {
 }
 
 .item_title {
-    background-image: url("../images/title_background.jpg");
+    /*background-image: url("../images/title_background.jpg");*/
+    background-color: transparent;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 5px;
     border-style: solid;
-    border-color: black;
     border-width: 1px;
     margin-right: 1.5%;
-    width: 150px;
+    width: 170px;
     padding: 1px;
     margin-bottom: 0%;
     text-align: center;
     text-shadow: 3px 2px 2px DimGray;
 }
 
-
-
-#author {
-    background-color: darksalmon;
+p.item_title:hover {
+    text-transform: uppercase;
+    color: MidnightBlue;
+    transition: color 1.5s;
 }
 
-p#author:hover {
-    text-transform: capitalize;
-}
+
 
 #rules {
     background-color: lemonchiffon;
@@ -98,27 +103,63 @@ p#author:hover {
     background-color:rosybrown;
 }
 
-#repository:hover{
-    text-transform: capitalize;
+
+.menu_item {
+    background-color: transparent;
+    background-image: none;
 }
 
-
 .item_description {
+    border-top-left-radius: 10px;
     margin-top: 0%;
-    height: 200px;
-    background-image: url("../images/item_background.jpg");
+    height: 250px;
+    background-image: none;
+    background-color: transparent;
     text-shadow: 2px 1px 2px slategray;
 }
 
+p.item_description:hover {
+    border-color: maroon;
+    font-weight: bold;
+    transition: border-color 1.5s;
+}
+
 .screenshot_description {
-    width: 50%;
+    width: 70%;
     height: 200px;
+    background-image: none;
+    background-color: transparent;
+    border-radius: 10px;
     
+}
+
+p.screenshot_description:hover {
+    border-color: maroon;
+    font-weight: bold;
+    transition: border-color 1.5s;
+}
+
+.item_container {
+    background-color: transparent;
+    background-image: none;
+}
+
+.friends_link {
+    background-color: transparent;
+}
+
+.friends_link:hover {
+    font-size: 1.4em;
+    color: slateblue;
+    transition: font-size 1.5s,
+                color 1.5s;
 }
 
 
 
 /*Large devices*/
+
+
 
 @media (min-width: 1040px) {
     .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
